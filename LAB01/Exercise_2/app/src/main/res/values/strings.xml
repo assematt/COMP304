@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Group3_COMP304Lab1_Ex2</string>
+    <string-array name="activity_list_items">
+        <item>AIActivity</item>
+        <item>VRActivity</item>
+    </string-array>
 </resources>

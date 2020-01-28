@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
+
 
 public class ActivityLifetimeFragment extends Fragment {
 
@@ -39,7 +42,16 @@ public class ActivityLifetimeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_lifecycle, container, false);
 
+        makeText(getActivity(), "ActivityLifetimeFragment onCreateView", LENGTH_SHORT).show();
+
         return view;
+    }
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        makeText(getActivity(), "ActivityLifetimeFragment onStart", LENGTH_SHORT).show();
     }
 
     public void updateText(String message)

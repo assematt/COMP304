@@ -66,15 +66,21 @@ public class ActivityListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int position, long arg3) {
-                makeText(getActivity(), (String)parent.getAdapter().getItem(position), LENGTH_SHORT).show();
-
                 mListener.onListFragmentInteraction((String)parent.getAdapter().getItem(position));
             }
         });
 
+        makeText(getActivity(), "ActivityListFragment onCreateView", LENGTH_SHORT).show();
+
         return view;
     }
 
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        makeText(getActivity(), "ActivityListFragment onStart", LENGTH_SHORT).show();
+    }
 
     @Override
     public void onAttach(Context context) {

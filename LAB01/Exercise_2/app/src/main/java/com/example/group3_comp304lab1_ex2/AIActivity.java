@@ -3,10 +3,9 @@ package com.example.group3_comp304lab1_ex2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity implements ActivityListFragment.OnListFragmentInteractionListener, ActivityLifetimeFragment.OnLifetimeFragmentInteractionListener {
+public class AIActivity extends AppCompatActivity implements ActivityLifetimeFragment.OnLifetimeFragmentInteractionListener {
 
     FragmentManager fragmentManager;
 
@@ -15,12 +14,12 @@ public class MainActivity extends AppCompatActivity implements ActivityListFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_ai);
 
         fragmentManager = getSupportFragmentManager();
 
         activityLifetimeFragment = (ActivityLifetimeFragment)fragmentManager.findFragmentById(R.id.lifecycleFragment);
-        activityLifetimeFragment.updateText("MainActivity");
+        activityLifetimeFragment.updateText("AIActivity");
         activityLifetimeFragment.updateText("OnCreate");
     }
 
@@ -43,23 +42,6 @@ public class MainActivity extends AppCompatActivity implements ActivityListFragm
     {
         activityLifetimeFragment.updateText("OnDestroy");
         super.onDestroy();
-    }
-
-    @Override
-    public void onListFragmentInteraction(String item) {
-
-        switch (item)
-        {
-            case "VRActivity": {
-                Intent intent = new Intent(this, VRActivity.class);
-                startActivity(intent);
-            } break;
-
-            case "AIActivity": {
-                Intent intent = new Intent(this, AIActivity.class);
-                startActivity(intent);
-            } break;
-        }
     }
 
     @Override

@@ -1,3 +1,9 @@
+/*
+* Author: Group3
+* Members: Matteo Assenza, Leslie Renee Dizon, Robin Joseph Augustine, Jokku Sabu Kattakkayam, Harkirat Grewal
+* Date: January 27, 2020
+* */
+
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;

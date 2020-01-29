@@ -26,5 +26,5 @@
         android:id="@+id/tvc_fragment"
         android:name="com.example.lab1_ex2.TVCFragment"
         android:layout_width="match_parent"
-        android:layout_height="400dp" />
+        android:layout_height="575dp" />
 </LinearLayout>

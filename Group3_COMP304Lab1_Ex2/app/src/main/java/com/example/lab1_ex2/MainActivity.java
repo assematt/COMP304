@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         textView.append("\n onCreate executed");
 
         // create the toast message for the executed life cycle method
-        Toast.makeText(getBaseContext(),"onCreate executed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),"Main Activity onCreate executed", Toast.LENGTH_SHORT).show();
 
         Log.d(tag, "In this State (onCreate), the activity is created.");
     }
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.main_activity_lc);
         textView.append("\n onStart executed");
 
-        Toast.makeText(getBaseContext(),"onStart executed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),"Main Activity onStart executed", Toast.LENGTH_SHORT).show();
 
         Log.d(tag, "In this State (onStart), the activity is started.");
     }
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.main_activity_lc);
         textView.append("\n onRestart executed");
 
-        Toast.makeText(getBaseContext(),"onRestart executed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),"Main Activity onRestart executed", Toast.LENGTH_SHORT).show();
 
         Log.d(tag, "In this State (onRestart), the activity is restarted.");
     }
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.main_activity_lc);
         textView.append("\n onResume executed");
 
-        Toast.makeText(getBaseContext(),"onResume executed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),"Main Activity onResume executed", Toast.LENGTH_SHORT).show();
 
         Log.d(tag, "In this State (onResume), the activity is in the " +
                 "foreground, and the user can interact with it.");
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.main_activity_lc);
         textView.append("\n onPause executed");
 
-        Toast.makeText(getBaseContext(),"onPause executed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),"Main Activity onPause executed", Toast.LENGTH_SHORT).show();
 
         Log.d(tag, "In this State (onPause), the activity is partially obscured " +
                 "by the another activity that's in the foreground is semi-transparent.");
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.main_activity_lc);
         textView.append("\n onStop executed");
 
-        Toast.makeText(getBaseContext(),"onStop executed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),"Main Activity onStop executed", Toast.LENGTH_SHORT).show();
 
         Log.d(tag, "In this State (onStop), the activity is stopped.");
     }
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.main_activity_lc);
         textView.append("\n onDestroy executed");
 
-        Toast.makeText(getBaseContext(),"onDestroy executed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(),"Main Activity onDestroy executed", Toast.LENGTH_SHORT).show();
 
         Log.d(tag, "In this case (onDestroy), the activity is destroyed " +
                 "and removed from the memory.");

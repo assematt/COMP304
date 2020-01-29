@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00BCD4"
-    android:orientation="vertical"
-    tools:context=".LVCFragment">
+    tools:context=".VRActivity">
 
-    <ListView
-        android:id="@+id/lv_activity"
+    <TextView
+        android:id="@+id/vr_activity_lc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:text="@string/vr_activity" />
 </LinearLayout>

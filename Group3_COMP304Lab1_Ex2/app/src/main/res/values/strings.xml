@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Lab1_Ex2</string>
     <string name="main_activity">Main Activity:</string>
+    <string name="ai_activity">AI Activity:</string>
+    <string name="vr_activity">VR Activity:</string>
     <string name="life_cycle">Life Cycle Methods Demonstration</string>
 </resources>

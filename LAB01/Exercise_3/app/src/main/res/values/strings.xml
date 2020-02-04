@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Substitution Cipher</string>
+    <string name="code_btn">Code</string>
+    <string name="decode_btn">Decode</string>
+    <string name="encode_string_hint">Enter the word to encode</string>
+    <string name="encode_string_label">The encoded word is:</string>
+    <string name="decode_string_label">The decoded word is:</string>
+</resources>

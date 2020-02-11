@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="192dp"
+        android:layout_height="274dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150dp"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/enter_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:width="200dp"
+        android:background="#4CAF50"
+        android:onClick="LoadHomeTypeActivity"
+        android:text="ENTER"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        tools:text="ENTER" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="140dp"
+        android:text="THE WEIGHT APP"
+        android:textColor="#4CAF50"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+</FrameLayout>

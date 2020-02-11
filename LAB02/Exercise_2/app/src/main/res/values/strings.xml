@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lorentz Formula</string>
+    <string name="app_name">LorentzFormula</string>
     <string name="result_intro">Pay attention to your health!</string>
     <string name="over">You may need to balance your weight by losing</string>
     <string name="below">You may need to balance your weight by gaining</string>

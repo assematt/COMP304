@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/card_number_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Card Number" />
+
+    <EditText
+        android:id="@+id/card_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_number_text"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/card_hoder_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_number"
+        android:text="Card Holder" />
+
+    <EditText
+        android:id="@+id/card_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_hoder_text"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/expiry_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_holder"
+        android:text="Expiry Date" />
+
+    <EditText
+        android:id="@+id/expiry_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/expiry_text"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/cvv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/expiry_text"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginRight="60dp"
+        android:text="CVV" />
+
+    <EditText
+        android:id="@+id/cvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/expiry_date"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="26dp"
+        android:ems="3"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/expiry_date"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:text="$5000"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:background="#9C27B0"
+        android:onClick="LoadConfirmationActivity"
+        android:text="PAY NOW"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>

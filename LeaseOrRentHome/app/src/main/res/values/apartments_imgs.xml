@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="apartment_imgs">
+        <item>@drawable/apartment1</item>
+        <item>@drawable/apartment2</item>
+        <item>@drawable/apartment3</item>
+    </integer-array>
+    <integer-array name="detached_imgs">
+        <item>@drawable/detached1</item>
+        <item>@drawable/detached2</item>
+    </integer-array>
+    <integer-array name="semidetached_imgs">
+        <item>@drawable/apartment1</item>
+        <item>@drawable/apartment2</item>
+        <item>@drawable/apartment3</item>
+    </integer-array>
+    <integer-array name="condominum_imgs">
+        <item>@drawable/detached1</item>
+        <item>@drawable/detached2</item>
+    </integer-array>
+    <integer-array name="townhouse_imgs">
+        <item>@drawable/detached1</item>
+        <item>@drawable/detached2</item>
+    </integer-array>
+</resources>

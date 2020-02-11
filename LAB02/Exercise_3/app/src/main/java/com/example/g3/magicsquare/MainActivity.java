@@ -15,12 +15,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /** Called when the user taps the Send button */
+    /** Called when the user taps the Generate button */
     public void generateMagicSquare(View view) {
-        // Do something in response to button
+        // Pass the Magic Square Size from Main Activity to the DisplayGridActivity
         Intent intent = new Intent(this, DisplayGridActivity.class);
         EditText txtSquareSize = (EditText) findViewById(R.id.txtSquareSize);
-        int magic_square_size = Integer.parseInt(txtSquareSize.getText().toString());
+        int magic_square_size = Integer.parseInt(txtSquareSize.getText().toString()); // get the input from the EditText field and parse it to integer
         intent.putExtra("magic_square_size", magic_square_size);
         startActivity(intent);
     }

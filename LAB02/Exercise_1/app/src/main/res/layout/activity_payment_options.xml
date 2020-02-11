@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select your payment method:" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="339dp">
+
+        <RadioButton
+            android:id="@+id/radioCash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cash" />
+
+        <RadioButton
+            android:id="@+id/radioCredit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Credit Card" />
+
+        <RadioButton
+            android:id="@+id/radioDebit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Debit Card" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_horizontal"
+        android:text="$50000"
+        android:textSize="24sp"
+        tools:text="$50000" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/paynow"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_above="@id/cancel"
+            android:layout_alignParentBottom="false"
+            android:layout_gravity="bottom"
+            android:background="#9C27B0"
+            android:onClick="LoadCreditCradActivity"
+            android:text="PAY NOW"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:background="#E91E63"
+            android:text="@android:string/cancel"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+</LinearLayout>

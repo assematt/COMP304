@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="apartment_details">
+        <item>SkyView Apartments:Main:$750000</item>
+        <item>Blue Mountain:Main Street, Markham, M1B4X5:$750000</item>
+        <item>Sweet Home:Main Street, Markham, M1B4X5:$750000</item>
+    </string-array>
+
+    <string-array name="detached_details">
+        <item>Detached Mountain:Kevin Street, Markham, M1B4X5:$50000</item>
+        <item>Sweet Detached Homes:Sunny Street, Markham, M1B4X5:$750000</item>
+    </string-array>
+
+    <string-array name="semidetached_details">
+        <item>Semi Mountain:Main Street, Markham, M1B4X5:$50000</item>
+        <item>Sweet Home:Main Street, Markham, M1B4X5:$750000</item>
+    </string-array>
+
+    <string-array name="townhouse_details">
+        <item>Golden Villas:William Street, Markham, M1B4X5:$50000</item>
+        <item>Dream Town Houses:John Street, Markham, M1B4X5:$750000</item>
+    </string-array>
+
+    <string-array name="condominum_details">
+        <item>Cozy Condos:Jane Street, Markham, M1B4X5:$50000</item>
+        <item>Posh Homes:Villi Street, Markham, M1B4X5:$750000</item>
+    </string-array>
+
+</resources>

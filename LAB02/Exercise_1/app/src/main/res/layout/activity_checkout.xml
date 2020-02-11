@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/checkout_layout"
+        android:layout_width="match_parent"
+        android:layout_height="630dp"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#9C27B0"
+        android:onClick="LoadPaymentOptionsActivity"
+        android:text="CHECKOUT"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
+</LinearLayout>

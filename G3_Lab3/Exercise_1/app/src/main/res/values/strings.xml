@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DrawingImages</string>
+    <string name="draw_car">Draw Car</string>
+    <string name="drawarcs">Draw Arcs</string>
+    <string name="draw_flag">Draw Flag</string>
+    <string name="what_do_you_want_to_draw">What do you want to draw?</string>
+</resources>

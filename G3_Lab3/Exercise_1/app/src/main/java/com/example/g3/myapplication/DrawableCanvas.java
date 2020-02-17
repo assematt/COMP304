@@ -46,8 +46,8 @@ public class DrawableCanvas extends View {
         canvas.drawRect(200, 365, 725, 450, paint);
 
         // Draws the wheels
-        canvas.drawCircle(300, 460, 45, paint);
-        canvas.drawCircle(660, 460, 45, paint);
+        canvas.drawCircle(285, 460, 40, paint);
+        canvas.drawCircle(660, 460, 40, paint);
 
         // Draw the top part
         Path topPart = new Path();
@@ -112,16 +112,15 @@ public class DrawableCanvas extends View {
     private void DrawArcs(Canvas canvas) {
         // Create the paint object
         Paint paint = new Paint();
-        paint.setColor(Color.GRAY);
         paint.setStrokeWidth(15);
 
-        LinearGradient linearGradient = new LinearGradient(0, 0, canvas.getWidth(), canvas.getHeight(), Color.RED, Color.BLUE, Shader.TileMode.MIRROR);
+        int size = 50;
+        LinearGradient linearGradient = new LinearGradient(0, 0, size, size, Color.RED, Color.BLUE, Shader.TileMode.MIRROR);
         paint.setShader(linearGradient);
 
-        int size = 50;
-        for (int x = 0; x < canvas.getWidth(); x += size)
+        for (int x = -size; x < canvas.getWidth(); x += size)
         {
-            for (int y = 0; y < canvas.getHeight(); y += size / 2)
+            for (int y = -size; y < canvas.getHeight(); y += size / 2)
             {
                 RectF arcRect = new RectF(x, y, size + x, size + y);
                 canvas.drawArc(arcRect, 0, 90, false, paint);

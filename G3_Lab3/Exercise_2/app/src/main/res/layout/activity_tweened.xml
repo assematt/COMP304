@@ -6,14 +6,31 @@
     android:background="@color/background"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/button"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="40dp"
-        android:gravity="center"
-        android:text="@string/activateBtn" />
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="40dp"
+            android:gravity="center"
+            android:background="@color/startBtn"
+            android:text="@string/startBtn" />
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="40dp"
+            android:gravity="center"
+            android:background="@color/stopBtn"
+            android:text="@string/stopBtn" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/earth"

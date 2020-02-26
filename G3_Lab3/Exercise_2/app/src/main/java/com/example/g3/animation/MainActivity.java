@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 String entry = exercise.get(position);
-                Log.d("position: ", Integer.toString(position));
-                Log.d("entry: ",entry);
-
                 Intent intent = new Intent();
 
                 switch (entry)

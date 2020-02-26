@@ -10,35 +10,32 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class Tweened extends AppCompatActivity {
-    private Button btn;
+    private Button btnStart;
+    private Button btnStop;
     private ImageView MoonImg;
     private Animation moonRevolution;
-    private Boolean bool = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweened);
 
-        btn = (Button) findViewById(R.id.button);
+        btnStart = (Button) findViewById(R.id.btnStart);
+        btnStop = (Button) findViewById(R.id.btnStop);
         MoonImg = (ImageView) findViewById(R.id.moon);
         moonRevolution = AnimationUtils.loadAnimation(this, R.anim.revolution);
         moonRevolution.setRepeatCount(Animation.INFINITE);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(bool){
-                    btn.setText(getResources().getString(R.string.stopBtn));
-                    btn.setBackgroundColor(getResources().getColor(R.color.stopBtn));
-                    MoonImg.startAnimation(moonRevolution);
-                    bool = !bool;
-                } else{
-                    btn.setText(getResources().getString(R.string.startBtn));
-                    btn.setBackgroundColor(getResources().getColor(R.color.startBtn));
-                    MoonImg.clearAnimation();
-                    bool = !bool;
-                } //  ifElse
-            } //  onClick
+                MoonImg.startAnimation(moonRevolution);
+            }
+        });
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoonImg.clearAnimation();
+            }
         });
     }
 }

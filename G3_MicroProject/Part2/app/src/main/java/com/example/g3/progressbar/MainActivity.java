@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         int seconds = secondsPicker.getValue();
 
         int timeToPlay = ( minute * 60 ) + seconds;
-        Log.d( TAG,"timeToPlay: " + timeToPlay );
+        //Log.d( TAG,"timeToPlay: " + timeToPlay );
 
         Intent intent = new Intent(this, GuessingGame.class);
         intent.putExtra("timeToPlay", timeToPlay);

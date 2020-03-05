@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,23 +28,59 @@ public class GuessingGame extends AppCompatActivity
     int attempts = 10;
     int score = attempts * 10;
 
+    boolean timeNotExhausted = true;
+
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guessing_game);
 
+        progressBar = ( ProgressBar ) findViewById( R.id.progressBar );
+
+        Intent intent = getIntent();
+        final int timeToPlay = intent.getIntExtra("timeToPlay", 60);
+
+        new CountDownTimer(timeToPlay * 1000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Log.d( TAG,"timeToPlay: " + timeToPlay );
+                float progressCounter = millisUntilFinished/1000;
+                float progressPercentage = (progressCounter / timeToPlay) * 100;
+                Log.d( TAG, "progressCounter: " + progressCounter);
+                Log.d( TAG, "progressPercentage: " + progressPercentage);
+                int progress = (int) progressPercentage;
+                Log.d( TAG, "progress: " + progress);
+
+                if( timeNotExhausted )
+                {
+                    progressBar.setProgress(progress);
+                }
+            }
+            @Override
+            public void onFinish() {
+                timeNotExhausted = false;
+                progressBar.setProgress(0);
+                displayToastResult( getString( R.string.timeover ) );
+                disable();
+            }
+        }.start();
+
         Random random = new Random();
         randNum = random.nextInt(100);
 
-        Log.d(TAG,"randNum: " + randNum);
-
         Button btnGuess = (Button) findViewById( R.id.btnGuess );
+
         btnGuess.setOnClickListener( new View.OnClickListener()
         {
             public void onClick( View v )
             {
-                guess(v);
+                if( timeNotExhausted )
+                {
+                    guess(v);
+                }
             }
         });
     }
@@ -58,6 +96,7 @@ public class GuessingGame extends AppCompatActivity
         try
         {
             int guessNumber = Integer.parseInt( edtNum.getText().toString() );
+
             if ( attempts == 0 )
             {
                 displayToastResult( getString( R.string.loseMessage ) );
@@ -115,6 +154,8 @@ public class GuessingGame extends AppCompatActivity
     {
         EditText edtNum = (EditText) findViewById( R.id.edtNum );
         edtNum.setEnabled( false );
+        timeNotExhausted = false;
+        progressBar.setProgress(0);
         afterFinish();
     }
 
@@ -122,6 +163,8 @@ public class GuessingGame extends AppCompatActivity
     {
         Button btnRestart = (Button) findViewById( R.id.btnGuess );
         btnRestart.setText( "Restart" );
+        timeNotExhausted = false;
+        progressBar.setProgress(0);
 
         final Intent intent = new Intent(this, MainActivity.class);
         btnRestart.setOnClickListener(new View.OnClickListener() {

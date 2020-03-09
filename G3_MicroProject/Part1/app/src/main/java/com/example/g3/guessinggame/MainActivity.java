@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         Random random = new Random();
         randNum = random.nextInt(100); // get a random number from 1-100
 
-        //Log.d(TAG,"randNum: " + randNum);
+        Log.d(TAG,"randNum: " + randNum);
 
         Button btnGuess = (Button) findViewById( R.id.btnGuess );
         btnGuess.setOnClickListener( new View.OnClickListener()

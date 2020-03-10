@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
 
+    public static SQLiteDatabase canadaDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         if( !this.databaseList().equals("canada_db") ) // run step 1 only if the db doesn't exist yet
         {
             //Create database
-            SQLiteDatabase canadaDb = openOrCreateDatabase("canada_db", MODE_PRIVATE, null);
+            canadaDb = openOrCreateDatabase("canada_db", MODE_PRIVATE, null);
 
             //create and populate Province Table
             createAndPopulateProvinceTable(canadaDb);

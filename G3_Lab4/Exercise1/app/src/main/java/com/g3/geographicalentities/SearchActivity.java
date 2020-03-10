@@ -12,8 +12,6 @@ import android.widget.Spinner;
 
 public class SearchActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

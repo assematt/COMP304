@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class TableListActivity extends AppCompatActivity {
 
     private final String TAG = "TableListActivity";
+    private String selected_title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +24,12 @@ public class TableListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_table_list);
 
         String from = getIntent().getStringExtra("from");
+
         if(from.equals("list"))
         {
             String selected_item = getIntent().getStringExtra("selected_item");
 
+            selected_title = selected_item;
             String query = "select * from "+selected_item;
             Log.d(TAG, "query: " + query);
             Cursor rs = MainActivity.canadaDb.rawQuery(query, null);
@@ -39,6 +42,9 @@ public class TableListActivity extends AppCompatActivity {
         {
             String searched_item = getIntent().getStringExtra("searched_item");
             String searched_table = getIntent().getStringExtra("searched_table");
+
+
+            selected_title = searched_table;
 
             //Open database canada_db
 
@@ -76,7 +82,13 @@ public class TableListActivity extends AppCompatActivity {
             textView.setLayoutParams(param);
 
 
-            String title = rs.getColumnName(j).replace("_"," ").toUpperCase();
+            String title = "";
+
+            if (j == 0)
+                title +=  selected_title.toUpperCase() + " ";
+
+            title += rs.getColumnName(j).replace("_"," ").toUpperCase();
+
             textView.setText(title);
             Log.d(TAG, "title: " + title);
             textView.setGravity(Gravity.CENTER);

@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imageView2);
         imageView.setImageResource(R.drawable.flag);
 
-        Log.d(TAG, "Hello!");
         Log.d(TAG, "this.databaseList(): " + this.databaseList().toString());
         Log.d(TAG, "this.databaseList().equals(\"canada_db\"): " + this.databaseList().equals("canada_db"));
 

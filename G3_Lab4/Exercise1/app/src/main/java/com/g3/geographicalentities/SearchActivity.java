@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -27,6 +28,13 @@ public class SearchActivity extends AppCompatActivity {
 
         Intent search_intent = new Intent(SearchActivity.this, TableListActivity.class);
         String searched_item = editBox.getText().toString();
+
+        if (searched_item.isEmpty())
+        {
+            Toast.makeText( this, "Please enter a string to search", Toast.LENGTH_SHORT ).show();
+            return;
+        }
+
         String searched_table = spinner.getSelectedItem().toString();
 
         search_intent.putExtra("searched_item", searched_item);

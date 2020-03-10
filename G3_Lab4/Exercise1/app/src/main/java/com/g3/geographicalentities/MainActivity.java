@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         {
             canadaDb = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath("canada_db").getPath(), null, SQLiteDatabase.OPEN_READONLY);
         }
-        catch (Exception e)
+        catch (Exception e) // if the db cannot be opened, step 1 is started and populated, otherwise, this is skipped
         {
             //Create database
             canadaDb = openOrCreateDatabase("canada_db", MODE_PRIVATE, null);

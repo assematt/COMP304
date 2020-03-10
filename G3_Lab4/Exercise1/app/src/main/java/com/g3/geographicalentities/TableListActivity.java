@@ -59,6 +59,9 @@ public class TableListActivity extends AppCompatActivity {
         Log.d(TAG, "rs.getCount(): " + rs.getCount());
         TableLayout ll = (TableLayout) findViewById(R.id.canada_table);
 
+        /*
+        * START: Populate Table Header by getting them from the query
+        * */
         TableRow rowHeader = new TableRow(this);
         TableRow.LayoutParams lpHeader = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -89,7 +92,13 @@ public class TableListActivity extends AppCompatActivity {
             rowHeader.addView(textView);
         }
         ll.addView(rowHeader,0);
+        /*
+         * END: Populate Table Header by getting them from the query
+         * */
 
+        /*
+         * START: Populate row from query result
+         * */
         Integer i = 1;
         do
         {
@@ -134,5 +143,8 @@ public class TableListActivity extends AppCompatActivity {
 
             i++;
         } while ( rs.moveToNext() );
+        /*
+         * END: Populate row from query result
+         * */
     }
 }

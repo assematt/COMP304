@@ -71,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
     void createAndPopulateProvinceTable(SQLiteDatabase canadaDb)
     {
         //create province table
-        canadaDb.execSQL("create table if not exists Provinces (province_name varchar(20), country_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
-
-        canadaDb.execSQL("delete from Provinces");
+        canadaDb.execSQL("create table if not exists Provinces (name varchar(20), country_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
         //insert values to Provinces table
         canadaDb.execSQL("insert into Provinces values('British Columbia', 'Canada', '2510789', '2560547', '5105576', '922503.01(kmsq)', '5.0/kmsq')");
@@ -94,9 +92,7 @@ public class MainActivity extends AppCompatActivity {
     void createAndPopulateDistrictsTable(SQLiteDatabase canadaDb)
     {
         //Create Districts table
-        canadaDb.execSQL("create table if not exists Districts (district_name varchar(20), province_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
-
-        canadaDb.execSQL("delete from Districts");
+        canadaDb.execSQL("create table if not exists Districts (name varchar(20), province_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
         //populate Districts Table
         canadaDb.execSQL("insert into Districts values('Abbotsford', 'British Columbia', '51789', '20547', '55576', '9203.01(kmsq)', '5.0/kmsq')");
@@ -114,9 +110,7 @@ public class MainActivity extends AppCompatActivity {
     void createAndPopulateMunicipalityTable(SQLiteDatabase canadaDb)
     {
         //Create Municipality table
-        canadaDb.execSQL("create table if not exists Municipality (municipality_name varchar(20), province_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
-
-        canadaDb.execSQL("delete from Municipality");
+        canadaDb.execSQL("create table if not exists Municipality (name varchar(20), province_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
         //populate Municipality Table
         canadaDb.execSQL("insert into Municipality values('Pincher Creek', 'British Columbia', '21789', '20547', '15576', '203.01(kmsq)', '5.0/kmsq')");
@@ -134,9 +128,7 @@ public class MainActivity extends AppCompatActivity {
     void createAndPopulateCountyTable(SQLiteDatabase canadaDb)
     {
         //Create County table
-        canadaDb.execSQL("create table if not exists County (county_name varchar(20), province_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
-
-        canadaDb.execSQL("delete from County");
+        canadaDb.execSQL("create table if not exists County (name varchar(20), province_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
         //populate County Table
         canadaDb.execSQL("insert into County values('Red Deer County', 'British Columbia', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
@@ -154,80 +146,72 @@ public class MainActivity extends AppCompatActivity {
     void createAndPopulateTownTable(SQLiteDatabase canadaDb)
     {
         //Create Town table
-        canadaDb.execSQL("create table if not exists Town (town_name varchar(20), province_name varchar(20), municipality_name varchar(20) DEFAULT NULL, district_name varchar(20) DEFAULT NULL, county_name varchar(20) DEFAULT NULL, male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
-
-        canadaDb.execSQL("delete from Town");
+        canadaDb.execSQL("create table if not exists Town (name varchar(20), province_name varchar(20), municipality_name varchar(20) DEFAULT NULL, district_name varchar(20) DEFAULT NULL, county_name varchar(20) DEFAULT NULL, male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
         //populate Town Table
-        canadaDb.execSQL("insert into Town(town_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Red Deer Town', 'British Columbia', 'Pincher Creek', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Leth Bridge Town', 'Ontario','Leth Bridge County', '107877', '60547', '11576', '1503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Lamont Town', 'Nova Scotia Columbia','Central Nova', '34578', '15549', '11076', '401.01(kmsq)', '2.0/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Kneehill Town', 'Quebec','Kneehill County', '43488', '15609', '21076', '101.01(kmsq)', '3.2/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Nunavut Town', 'Nunavut','Nunavut County', '25104', '25647', '21054', '103.01(kmsq)', '2.3/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Ponoka Town', 'Saskatchewan','Cypress', '15188', '25547', '7576', '112.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Rocky View Town', 'Alberta','Calgary Centre', '2100', '3347', '42576', '227.01(kmsq)', '1.0/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Saddel Hill Town', 'Manitoba','Churchill', '11781', '23607', '61056', '673.01(kmsq)', '1.2/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Smoky Lake Town', 'Yukon','Brazeau', '4678', '22547', '2274', '1203.01(kmsq)', '6.02/kmsq')");
-        canadaDb.execSQL("insert into Town(town_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Starland Town', 'Newfoundland and Labrador','Starland County', '3789', '1543', '1576', '1503.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Red Deer Town', 'British Columbia', 'Pincher Creek', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Leth Bridge Town', 'Ontario','Leth Bridge County', '107877', '60547', '11576', '1503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Lamont Town', 'Nova Scotia Columbia','Central Nova', '34578', '15549', '11076', '401.01(kmsq)', '2.0/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Kneehill Town', 'Quebec','Kneehill County', '43488', '15609', '21076', '101.01(kmsq)', '3.2/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Nunavut Town', 'Nunavut','Nunavut County', '25104', '25647', '21054', '103.01(kmsq)', '2.3/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Ponoka Town', 'Saskatchewan','Cypress', '15188', '25547', '7576', '112.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Rocky View Town', 'Alberta','Calgary Centre', '2100', '3347', '42576', '227.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Saddel Hill Town', 'Manitoba','Churchill', '11781', '23607', '61056', '673.01(kmsq)', '1.2/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Smoky Lake Town', 'Yukon','Brazeau', '4678', '22547', '2274', '1203.01(kmsq)', '6.02/kmsq')");
+        canadaDb.execSQL("insert into Town(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Starland Town', 'Newfoundland and Labrador','Starland County', '3789', '1543', '1576', '1503.01(kmsq)', '1.0/kmsq')");
     }
 
     void createAndPopulateCityTable(SQLiteDatabase canadaDb)
     {
         //Create City table
-        canadaDb.execSQL("create table if not exists City (city_name varchar(20), province_name varchar(20), municipality_name varchar(20) DEFAULT NULL, district_name varchar(20) DEFAULT NULL, county_name varchar(20) DEFAULT NULL, male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
-
-        canadaDb.execSQL("delete from City");
+        canadaDb.execSQL("create table if not exists City (name varchar(20), province_name varchar(20), municipality_name varchar(20) DEFAULT NULL, district_name varchar(20) DEFAULT NULL, county_name varchar(20) DEFAULT NULL, male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
         //populate City Table
-        canadaDb.execSQL("insert into City(city_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Red Deer City', 'British Columbia', 'Pincher Creek', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Leth Bridge City', 'Ontario','Leth Bridge County', '107877', '60547', '11576', '1503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Lamont City', 'Nova Scotia Columbia','Central Nova', '34578', '15549', '11076', '401.01(kmsq)', '2.0/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Kneehill City', 'Quebec','Kneehill County', '43488', '15609', '21076', '101.01(kmsq)', '3.2/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Nunavut City', 'Nunavut','Nunavut County', '25104', '25647', '21054', '103.01(kmsq)', '2.3/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Ponoka City', 'Saskatchewan','Cypress', '15188', '25547', '7576', '112.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Rocky View City', 'Alberta','Calgary Centre', '2100', '3347', '42576', '227.01(kmsq)', '1.0/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Saddel Hill City', 'Manitoba','Churchill', '11781', '23607', '61056', '673.01(kmsq)', '1.2/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Smoky Lake City', 'Yukon','Brazeau', '4678', '22547', '2274', '1203.01(kmsq)', '6.02/kmsq')");
-        canadaDb.execSQL("insert into City(city_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Starland City', 'Newfoundland and Labrador','Starland County', '3789', '1543', '1576', '1503.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Red Deer City', 'British Columbia', 'Pincher Creek', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Leth Bridge City', 'Ontario','Leth Bridge County', '107877', '60547', '11576', '1503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Lamont City', 'Nova Scotia Columbia','Central Nova', '34578', '15549', '11076', '401.01(kmsq)', '2.0/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Kneehill City', 'Quebec','Kneehill County', '43488', '15609', '21076', '101.01(kmsq)', '3.2/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Nunavut City', 'Nunavut','Nunavut County', '25104', '25647', '21054', '103.01(kmsq)', '2.3/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Ponoka City', 'Saskatchewan','Cypress', '15188', '25547', '7576', '112.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Rocky View City', 'Alberta','Calgary Centre', '2100', '3347', '42576', '227.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Saddel Hill City', 'Manitoba','Churchill', '11781', '23607', '61056', '673.01(kmsq)', '1.2/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Smoky Lake City', 'Yukon','Brazeau', '4678', '22547', '2274', '1203.01(kmsq)', '6.02/kmsq')");
+        canadaDb.execSQL("insert into City(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Starland City', 'Newfoundland and Labrador','Starland County', '3789', '1543', '1576', '1503.01(kmsq)', '1.0/kmsq')");
     }
 
     void createAndPopulateVillageTable(SQLiteDatabase canadaDb)
     {
         //Create Village table
-        canadaDb.execSQL("create table if not exists Village (village_name varchar(20), province_name varchar(20), municipality_name varchar(20) DEFAULT NULL, district_name varchar(20) DEFAULT NULL, county_name varchar(20) DEFAULT NULL, male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
-
-        canadaDb.execSQL("delete from Village");
+        canadaDb.execSQL("create table if not exists Village (name varchar(20), province_name varchar(20), municipality_name varchar(20) DEFAULT NULL, district_name varchar(20) DEFAULT NULL, county_name varchar(20) DEFAULT NULL, male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
         //populate Village Table
-        canadaDb.execSQL("insert into Village(village_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Red Deer Village', 'British Columbia', 'Pincher Creek', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Leth Bridge Village', 'Ontario','Leth Bridge County', '107877', '60547', '11576', '1503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Lamont Village', 'Nova Scotia Columbia','Central Nova', '34578', '15549', '11076', '401.01(kmsq)', '2.0/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Kneehill Village', 'Quebec','Kneehill County', '43488', '15609', '21076', '101.01(kmsq)', '3.2/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Nunavut Village', 'Nunavut','Nunavut County', '25104', '25647', '21054', '103.01(kmsq)', '2.3/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Ponoka Village', 'Saskatchewan','Cypress', '15188', '25547', '7576', '112.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Rocky View Village', 'Alberta','Calgary Centre', '2100', '3347', '42576', '227.01(kmsq)', '1.0/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, district_name, male_population, female_population,national_population, area, density) values('Saddel Hill Village', 'Manitoba','Churchill', '11781', '23607', '61056', '673.01(kmsq)', '1.2/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Smoky Lake Village', 'Yukon','Brazeau', '4678', '22547', '2274', '1203.01(kmsq)', '6.02/kmsq')");
-        canadaDb.execSQL("insert into Village(village_name, province_name, county_name, male_population, female_population,national_population, area, density) values('Starland Village', 'Newfoundland and Labrador','Starland County', '3789', '1543', '1576', '1503.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Red Deer Village', 'British Columbia', 'Pincher Creek', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Leth Bridge Village', 'Ontario','Leth Bridge County', '107877', '60547', '11576', '1503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Lamont Village', 'Nova Scotia Columbia','Central Nova', '34578', '15549', '11076', '401.01(kmsq)', '2.0/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Kneehill Village', 'Quebec','Kneehill County', '43488', '15609', '21076', '101.01(kmsq)', '3.2/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Nunavut Village', 'Nunavut','Nunavut County', '25104', '25647', '21054', '103.01(kmsq)', '2.3/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Ponoka Village', 'Saskatchewan','Cypress', '15188', '25547', '7576', '112.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Rocky View Village', 'Alberta','Calgary Centre', '2100', '3347', '42576', '227.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, district_name, male_population, female_population,national_population, area, density) values('Saddel Hill Village', 'Manitoba','Churchill', '11781', '23607', '61056', '673.01(kmsq)', '1.2/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, municipality_name, male_population, female_population,national_population, area, density) values('Smoky Lake Village', 'Yukon','Brazeau', '4678', '22547', '2274', '1203.01(kmsq)', '6.02/kmsq')");
+        canadaDb.execSQL("insert into Village(name, province_name, county_name, male_population, female_population,national_population, area, density) values('Starland Village', 'Newfoundland and Labrador','Starland County', '3789', '1543', '1576', '1503.01(kmsq)', '1.0/kmsq')");
     }
 
     void createAndPopulateWardTable(SQLiteDatabase canadaDb)
     {
         //Create Ward table
-        canadaDb.execSQL("create table if not exists Ward (ward_name varchar(20), province_name varchar(20), municipality_name varchar(20) DEFAULT NULL, district_name varchar(20) DEFAULT NULL, county_name varchar(20) DEFAULT NULL, city_name varchar(20) DEFAULT NULL, town_name varchar(20) DEFAULT NULL, village_name varchar(20) DEFAULT NULL, male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
-
-        canadaDb.execSQL("delete from Ward");
+        canadaDb.execSQL("create table if not exists Ward (name varchar(20), province_name varchar(20), municipality_name varchar(20) DEFAULT NULL, district_name varchar(20) DEFAULT NULL, county_name varchar(20) DEFAULT NULL, city_name varchar(20) DEFAULT NULL, town_name varchar(20) DEFAULT NULL, village_name varchar(20) DEFAULT NULL, male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
         //populate Ward Table
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, municipality_name, town_name, male_population, female_population,national_population, area, density) values('Red Deer Ward', 'British Columbia', 'Pincher Creek',  'Pincher Creek', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, county_name, city_name, male_population, female_population,national_population, area, density) values('Leth Bridge Ward', 'Ontario','Leth Bridge County', 'Leth Bridge City', '107877', '60547', '11576', '1503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, district_name, village_name, male_population, female_population,national_population, area, density) values('Lamont Ward', 'Nova Scotia Columbia','Central Nova','Lamont Village', '34578', '15549', '11076', '401.01(kmsq)', '2.0/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, county_name,town_name, male_population, female_population,national_population, area, density) values('Kneehill Ward', 'Quebec','Kneehill County','Kneehill Town', '43488', '15609', '21076', '101.01(kmsq)', '3.2/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, county_name,city_name, male_population, female_population,national_population, area, density) values('Nunavut Ward', 'Nunavut','Nunavut County','Nunavut City', '25104', '25647', '21054', '103.01(kmsq)', '2.3/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, municipality_name,village_name, male_population, female_population,national_population, area, density) values('Ponoka Ward', 'Saskatchewan','Cypress','Ponoka Village', '15188', '25547', '7576', '112.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, district_name,city_name, male_population, female_population,national_population, area, density) values('Rocky View Ward', 'Alberta','Calgary Centre','Rocky View City', '2100', '3347', '42576', '227.01(kmsq)', '1.0/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, district_name,city_name, male_population, female_population,national_population, area, density) values('Saddel Hill Ward', 'Manitoba','Churchill','Saddel Hill City', '11781', '23607', '61056', '673.01(kmsq)', '1.2/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, municipality_name,city_name, male_population, female_population,national_population, area, density) values('Smoky Lake Ward', 'Yukon','Brazeau','Smoky Lake City', '4678', '22547', '2274', '1203.01(kmsq)', '6.02/kmsq')");
-        canadaDb.execSQL("insert into Ward(ward_name, province_name, county_name,village_name, male_population, female_population,national_population, area, density) values('Starland Ward', 'Newfoundland and Labrador','Starland County','Starland Village', '3789', '1543', '1576', '1503.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, municipality_name, town_name, male_population, female_population,national_population, area, density) values('Red Deer Ward', 'British Columbia', 'Pincher Creek',  'Pincher Creek', '31782', '20547', '15576', '503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, county_name, city_name, male_population, female_population,national_population, area, density) values('Leth Bridge Ward', 'Ontario','Leth Bridge County', 'Leth Bridge City', '107877', '60547', '11576', '1503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, district_name, village_name, male_population, female_population,national_population, area, density) values('Lamont Ward', 'Nova Scotia Columbia','Central Nova','Lamont Village', '34578', '15549', '11076', '401.01(kmsq)', '2.0/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, county_name,town_name, male_population, female_population,national_population, area, density) values('Kneehill Ward', 'Quebec','Kneehill County','Kneehill Town', '43488', '15609', '21076', '101.01(kmsq)', '3.2/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, county_name,city_name, male_population, female_population,national_population, area, density) values('Nunavut Ward', 'Nunavut','Nunavut County','Nunavut City', '25104', '25647', '21054', '103.01(kmsq)', '2.3/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, municipality_name,village_name, male_population, female_population,national_population, area, density) values('Ponoka Ward', 'Saskatchewan','Cypress','Ponoka Village', '15188', '25547', '7576', '112.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, district_name,city_name, male_population, female_population,national_population, area, density) values('Rocky View Ward', 'Alberta','Calgary Centre','Rocky View City', '2100', '3347', '42576', '227.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, district_name,city_name, male_population, female_population,national_population, area, density) values('Saddel Hill Ward', 'Manitoba','Churchill','Saddel Hill City', '11781', '23607', '61056', '673.01(kmsq)', '1.2/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, municipality_name,city_name, male_population, female_population,national_population, area, density) values('Smoky Lake Ward', 'Yukon','Brazeau','Smoky Lake City', '4678', '22547', '2274', '1203.01(kmsq)', '6.02/kmsq')");
+        canadaDb.execSQL("insert into Ward(name, province_name, county_name,village_name, male_population, female_population,national_population, area, density) values('Starland Ward', 'Newfoundland and Labrador','Starland County','Starland Village', '3789', '1543', '1576', '1503.01(kmsq)', '1.0/kmsq')");
     }
 }

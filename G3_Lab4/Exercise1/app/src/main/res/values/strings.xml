@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Geographical Entities</string>
+    <string name="search_entity_button">Search Entity</string>
+    <string-array name="administrative_divisions">
+        <item>Provinces</item>
+        <item>Municipality</item>
+        <item>Districts</item>
+        <item>County</item>
+        <item>City</item>
+        <item>Town</item>
+        <item>Village</item>
+        <item>Ward</item>
+    </string-array>
 </resources>

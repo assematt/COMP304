@@ -41,11 +41,12 @@ public class TableListActivity extends AppCompatActivity {
         else if(from.equals("search"))
         {
             String searched_item = getIntent().getStringExtra("searched_item");
+            String searched_table = getIntent().getStringExtra("searched_table");
 
             //Open database canada_db
             SQLiteDatabase canadaDb = openOrCreateDatabase("canada_db", MODE_PRIVATE, null);
 
-            String query = "select * from "+searched_item;
+            String query = "select * from "+searched_table + " WHERE name LIKE '%"+searched_item+"%'";
             Log.d(TAG, "query: " + query);
             Cursor rs = canadaDb.rawQuery(query, null);
             rs.moveToFirst();

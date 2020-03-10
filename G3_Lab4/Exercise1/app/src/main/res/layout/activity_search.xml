@@ -3,17 +3,24 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView"
+    <Spinner
+        android:id="@+id/entityList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter entity name" />
+        android:entries="@array/administrative_divisions" />
+
+    <EditText
+        android:id="@+id/entityNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/search_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="TableSearch"
-        android:text="View Table" />
+        android:text="@string/search_entity_button" />
 
 </LinearLayout>

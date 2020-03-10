@@ -3,6 +3,7 @@ package com.g3.geographicalentities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +27,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "this.databaseList(): " + this.databaseList().toString());
         Log.d(TAG, "this.databaseList().equals(\"canada_db\"): " + this.databaseList().equals("canada_db"));
 
-        if( !this.databaseList().equals("canada_db") ) // run step 1 only if the db doesn't exist yet
+        try
+        {
+            canadaDb = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath("canada_db").getPath(), null, SQLiteDatabase.OPEN_READONLY);
+        }
+        catch (Exception e)
         {
             //Create database
             canadaDb = openOrCreateDatabase("canada_db", MODE_PRIVATE, null);

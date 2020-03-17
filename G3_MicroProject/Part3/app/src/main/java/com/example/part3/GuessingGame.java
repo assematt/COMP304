@@ -10,8 +10,11 @@ import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +27,24 @@ public class GuessingGame extends AppCompatActivity {
 
     private static final String TAG = "GuessingGame";
 
+    static final String[] numbers  = new String[]{"1","2","3","4","5","6","7","8","9","10",
+            "11","12","13","14","15","16","17","18","19","20",
+            "21","22","23","24","25","26","27","28","29","30",
+            "31","32","33","34","35","36","37","38","39","40",
+            "41","42","43","44","45","46","47","48","49","50",
+            "51","52","53","54","55","56","57","58","59","60",
+            "61","62","63","64","65","66","67","68","69","70",
+            "71","72","73","74","75","76","77","78","79","80",
+            "81","82","83","84","85","86","87","88","89","90",
+            "91","92","93","94","95","96","97","98","99","100",
+
+    };
+
     int randNum;                     // random number
     int attempts = 10;               // number of attempts/chances
     int score = attempts * 10;       // score
     int timeToPlay;
+    int guessNumber;
 
     boolean timeNotExhausted = true; // checker for time limit
 
@@ -119,11 +136,25 @@ public class GuessingGame extends AppCompatActivity {
 
     public void guess( View view )
     {
-        EditText edtNum = (EditText) findViewById( R.id.edtNum );
+        //EditText edtNum = (EditText) findViewById( R.id.edtNum );
+        GridView gridNum = (GridView) findViewById(R.id.numGrid);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,numbers);
+
+        gridNum.setAdapter(adapter);
+        gridNum.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //((TextView) view).setTextColor(0xD86565);
+                guessNumber = Integer.parseInt(((TextView)view).getText().toString());
+
+            }
+        });
 
         try
         {
-            int guessNumber = Integer.parseInt( edtNum.getText().toString() ); // number entered by user as a guess
+            //int guessNumber = Integer.parseInt( edtNum.getText().toString() ); // number entered by user as a guess
+
 
             if ( attempts == 0 ) // if chances are exhausted, display loseMessage from strings.xml as a Toast
             {
@@ -177,14 +208,14 @@ public class GuessingGame extends AppCompatActivity {
 
     public void clear()
     {
-        EditText edtNum = (EditText) findViewById( R.id.edtNum );
-        edtNum.setText( "" );
+        //EditText edtNum = (EditText) findViewById( R.id.edtNum );
+        //edtNum.setText( "" );
     }
 
     public void disable()
     {
-        EditText edtNum = (EditText) findViewById( R.id.edtNum );
-        edtNum.setEnabled( false );
+       // EditText edtNum = (EditText) findViewById( R.id.edtNum );
+      //  edtNum.setEnabled( false );
         timeNotExhausted = false;
         progressBar.setProgress(0);
         afterFinish();

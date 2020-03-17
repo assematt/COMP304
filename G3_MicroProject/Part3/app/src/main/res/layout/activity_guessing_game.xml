@@ -25,24 +25,11 @@
         android:layout_gravity="center"
         android:text="TextView" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="@string/guessMessage"
-        android:textAlignment="center"
-        android:textSize="18dp" />
-
-    <EditText
-        android:id="@+id/edtNum"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textSize="26dp" />
+    <GridView
+        android:id="@+id/numGrid"
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:numColumns="10" />
 
     <Button
         android:id="@+id/btnGuess"
@@ -83,6 +70,11 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
+            <SurfaceView
+                android:id="@+id/canvas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/tvAttempts"

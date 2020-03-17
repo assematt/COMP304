@@ -24,16 +24,17 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imageView2);
         imageView.setImageResource(R.drawable.flag);
 
-        Log.d(TAG, "Hello!");
         Log.d(TAG, "this.databaseList(): " + this.databaseList().toString());
         Log.d(TAG, "this.databaseList().equals(\"canada_db\"): " + this.databaseList().equals("canada_db"));
 
-        try
+        try // if the database exits, skip step 1
         {
             canadaDb = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath("canada_db").getPath(), null, SQLiteDatabase.OPEN_READONLY);
         }
-        catch (Exception e)
+        catch (Exception e) // if the database doesn't exist, do step 1
         {
+            // Step 1: Create database and populate the tables
+
             //Create database
             canadaDb = openOrCreateDatabase("canada_db", MODE_PRIVATE, null);
 
@@ -63,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void loadAboutCanadaView(View view)
+    {
+        Intent aboutCanada_intent = new Intent(MainActivity.this, AboutCanadaActivity.class);
+        startActivity(aboutCanada_intent);
+    }
+
     public void loadListView(View view)
     {
         Intent listview_intent = new Intent(MainActivity.this, ListActivity.class);
@@ -78,40 +85,40 @@ public class MainActivity extends AppCompatActivity {
     void createAndPopulateProvinceTable(SQLiteDatabase canadaDb)
     {
         //create province table
-        canadaDb.execSQL("create table if not exists Provinces (name varchar(20), country_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
+        canadaDb.execSQL("create table if not exists Province (name varchar(20), country_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
-        //insert values to Provinces table
-        canadaDb.execSQL("insert into Provinces values('British Columbia', 'Canada', '2510789', '2560547', '5105576', '922503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Alberta', 'Canada', '2199434', '2171882', '4395586', '640330.46(kmsq)', '6.4/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Saskatchewan', 'Canada', '591709', '582753', '1178657', '588243.54 (kmsq)', '1.9/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Manitoba', 'Canada', '684173', '685292', '1373859', '552370.99 (kmsq)', '2.3/ kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Ontario', 'Canada', '7195105', '7371442', '14659616', '908699.33 (kmsq)', '14.8/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Quebec', 'Canada', '4238281', '4246684', '8522800', '1356625.27(kmsq)', '6.0/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('New Brunswick', 'Canada', '384165', '392662', '780021', '71388.81(kmsq)', '10.5/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Nova Scotia', 'Canada', '475478', '495917', '976768', '52942.27(kmsq)', '17.4/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Prince Edward Island', 'Canada', '77182', '79765', '157901', '5686.03(kmsq)', '25.1/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Newfoundland and Labrador', 'Canada', '258030', '263512', '521922', '370514.08(kmsq)', '1.4/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Yukon', 'Canada', '20788', '20066', '41022', '474712.68(kmsq)', '0.08/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Northwest Territories', 'Canada', '23031', '21795', '44895', '1143793.86(kmsq)', '0.04/kmsq')");
-        canadaDb.execSQL("insert into Provinces values('Nunavut', 'Canada', '19920', '18860', '38873', '1877778.53(kmsq)', '0.02/kmsq')");
+        //insert values to Province table
+        canadaDb.execSQL("insert into Province values('British Columbia', 'Canada', '2510789', '2560547', '5105576', '922503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into Province values('Alberta', 'Canada', '2199434', '2171882', '4395586', '640330.46(kmsq)', '6.4/kmsq')");
+        canadaDb.execSQL("insert into Province values('Saskatchewan', 'Canada', '591709', '582753', '1178657', '588243.54 (kmsq)', '1.9/kmsq')");
+        canadaDb.execSQL("insert into Province values('Manitoba', 'Canada', '684173', '685292', '1373859', '552370.99 (kmsq)', '2.3/ kmsq')");
+        canadaDb.execSQL("insert into Province values('Ontario', 'Canada', '7195105', '7371442', '14659616', '908699.33 (kmsq)', '14.8/kmsq')");
+        canadaDb.execSQL("insert into Province values('Quebec', 'Canada', '4238281', '4246684', '8522800', '1356625.27(kmsq)', '6.0/kmsq')");
+        canadaDb.execSQL("insert into Province values('New Brunswick', 'Canada', '384165', '392662', '780021', '71388.81(kmsq)', '10.5/kmsq')");
+        canadaDb.execSQL("insert into Province values('Nova Scotia', 'Canada', '475478', '495917', '976768', '52942.27(kmsq)', '17.4/kmsq')");
+        canadaDb.execSQL("insert into Province values('Prince Edward Island', 'Canada', '77182', '79765', '157901', '5686.03(kmsq)', '25.1/kmsq')");
+        canadaDb.execSQL("insert into Province values('Newfoundland and Labrador', 'Canada', '258030', '263512', '521922', '370514.08(kmsq)', '1.4/kmsq')");
+        canadaDb.execSQL("insert into Province values('Yukon', 'Canada', '20788', '20066', '41022', '474712.68(kmsq)', '0.08/kmsq')");
+        canadaDb.execSQL("insert into Province values('Northwest Territories', 'Canada', '23031', '21795', '44895', '1143793.86(kmsq)', '0.04/kmsq')");
+        canadaDb.execSQL("insert into Province values('Nunavut', 'Canada', '19920', '18860', '38873', '1877778.53(kmsq)', '0.02/kmsq')");
     }
 
     void createAndPopulateDistrictsTable(SQLiteDatabase canadaDb)
     {
-        //Create Districts table
-        canadaDb.execSQL("create table if not exists Districts (name varchar(20), province_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
+        //Create District table
+        canadaDb.execSQL("create table if not exists District (name varchar(20), province_name varchar(20), male_population varchar(20), female_population varchar(20),national_population varchar(20), area varchar(20), density varchar(20))");
 
-        //populate Districts Table
-        canadaDb.execSQL("insert into Districts values('Abbotsford', 'British Columbia', '51789', '20547', '55576', '9203.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Ajax', 'Ontario', '2510789', '60547', '51576', '2503.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Central Nova', 'Nova Scotia Columbia', '20789', '25547', '51076', '9503.01(kmsq)', '2.0/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Central', 'Quebec', '35189', '25607', '51076', '9503.01(kmsq)', '3.2/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Nunavut', 'Nunavut', '25109', '25647', '51056', '9203.01(kmsq)', '2.3/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Blackstrap', 'Saskatchewan', '25189', '25547', '55576', '9223.01(kmsq)', '5.0/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Calgary Centre', 'Alberta', '25109', '5647', '51576', '9223.01(kmsq)', '1.0/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Churchill', 'Manitoba', '10789', '25607', '51056', '9203.01(kmsq)', '1.2/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Nanaimo', 'Yukon', '8679', '60547', '5576', '9203.01(kmsq)', '6.02/kmsq')");
-        canadaDb.execSQL("insert into Districts values('Avalon', 'Newfoundland and Labrador', '20789', '5547', '5576', '22503.01(kmsq)', '1.0/kmsq')");
+        //populate District Table
+        canadaDb.execSQL("insert into District values('Abbotsford', 'British Columbia', '51789', '20547', '55576', '9203.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into District values('Ajax', 'Ontario', '2510789', '60547', '51576', '2503.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into District values('Central Nova', 'Nova Scotia Columbia', '20789', '25547', '51076', '9503.01(kmsq)', '2.0/kmsq')");
+        canadaDb.execSQL("insert into District values('Central', 'Quebec', '35189', '25607', '51076', '9503.01(kmsq)', '3.2/kmsq')");
+        canadaDb.execSQL("insert into District values('Nunavut', 'Nunavut', '25109', '25647', '51056', '9203.01(kmsq)', '2.3/kmsq')");
+        canadaDb.execSQL("insert into District values('Blackstrap', 'Saskatchewan', '25189', '25547', '55576', '9223.01(kmsq)', '5.0/kmsq')");
+        canadaDb.execSQL("insert into District values('Calgary Centre', 'Alberta', '25109', '5647', '51576', '9223.01(kmsq)', '1.0/kmsq')");
+        canadaDb.execSQL("insert into District values('Churchill', 'Manitoba', '10789', '25607', '51056', '9203.01(kmsq)', '1.2/kmsq')");
+        canadaDb.execSQL("insert into District values('Nanaimo', 'Yukon', '8679', '60547', '5576', '9203.01(kmsq)', '6.02/kmsq')");
+        canadaDb.execSQL("insert into District values('Avalon', 'Newfoundland and Labrador', '20789', '5547', '5576', '22503.01(kmsq)', '1.0/kmsq')");
     }
 
     void createAndPopulateMunicipalityTable(SQLiteDatabase canadaDb)

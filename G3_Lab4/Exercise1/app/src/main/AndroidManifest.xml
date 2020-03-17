@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutCanadaActivity"></activity>
-        <activity android:name=".TableListActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ListActivity" />
+        <activity android:name=".AboutCanadaActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".TableListActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".SearchActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".ListActivity" android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

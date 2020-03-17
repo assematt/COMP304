@@ -17,6 +17,7 @@ import android.widget.TextView;
 public class TableListActivity extends AppCompatActivity {
 
     private final String TAG = "TableListActivity";
+    private String selected_title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class TableListActivity extends AppCompatActivity {
         if(from.equals("list"))
         {
             String selected_item = getIntent().getStringExtra("selected_item");
+            selected_title = selected_item;
 
             String query = "select * from "+selected_item;
             Log.d(TAG, "query: " + query);
@@ -40,6 +42,7 @@ public class TableListActivity extends AppCompatActivity {
         {
             String searched_item = getIntent().getStringExtra("searched_item");
             String searched_table = getIntent().getStringExtra("searched_table");
+            selected_title = searched_table;
 
 
             //Open database canada_db
@@ -79,7 +82,13 @@ public class TableListActivity extends AppCompatActivity {
                 );
                 textView.setLayoutParams(param);
 
-                String title = rs.getColumnName(j).replace("_"," ").toUpperCase();
+                String title = "";
+
+                if (j == 0)
+                    title +=  selected_title.toUpperCase() + " ";
+
+                title += rs.getColumnName(j).replace("_"," ").toUpperCase();
+
                 textView.setText(title);
                 Log.d(TAG, "title: " + title);
                 textView.setGravity(Gravity.CENTER);
@@ -149,11 +158,76 @@ public class TableListActivity extends AppCompatActivity {
         }
         else
         {
-            TextView textView = new TextView(this);
-            textView.setText("No data found!");
+            /*
+             * START: Populate Table Header by getting them from the query
+             * */
+            TableRow rowHeader = new TableRow(this);
+            TableRow.LayoutParams lpHeader = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
 
-            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.tableList);
-            linearLayout.addView(textView);
+            rowHeader.setLayoutParams(lpHeader);
+            rowHeader.setBackgroundColor(Color.BLUE);
+            for(int j=0;j<rs.getColumnCount();j++)
+            {
+                TextView textView = new TextView(this);
+
+                TableRow.LayoutParams param = new TableRow.LayoutParams(
+                        TableRow.LayoutParams.WRAP_CONTENT,
+                        TableRow.LayoutParams.WRAP_CONTENT,
+                        1.0f
+                );
+                textView.setLayoutParams(param);
+
+                String title = "";
+
+                if (j == 0)
+                    title +=  selected_title.toUpperCase() + " ";
+
+                title += rs.getColumnName(j).replace("_"," ").toUpperCase();
+
+                textView.setText(title);
+                Log.d(TAG, "title: " + title);
+                textView.setGravity(Gravity.CENTER);
+                textView.setTextColor(Color.WHITE);
+                textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+
+                textView.setWidth(250);
+                textView.setPadding(10,10,10,10);
+
+                rowHeader.addView(textView);
+            }
+            ll.addView(rowHeader,0);
+            /*
+             * END: Populate Table Header by getting them from the query
+             * */
+
+            /*
+             * START: Populate row from query result
+             * */
+            TableRow row= new TableRow(this);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+
+            row.setLayoutParams(lp);
+            row.setBackgroundColor(Color.GRAY);
+
+            TextView textView = new TextView(this);
+
+            TableRow.LayoutParams param = new TableRow.LayoutParams(
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    1.0f
+            );
+            textView.setLayoutParams(param);
+
+            textView.setText("No Results Found!");
+            textView.setTextColor(Color.WHITE);
+            textView.setWidth(250);
+            textView.setPadding(10,10,10,10);
+
+            row.addView(textView);
+            ll.addView(row,1);
+            /*
+             * END: Populate row from query result
+             * */
         }
 
     }

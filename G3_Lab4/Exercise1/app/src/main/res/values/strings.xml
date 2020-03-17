@@ -3,9 +3,9 @@
     <string name="search_entity_button">Search Entity</string>
     <string name="about_canada_button">About Canada</string>
     <string-array name="administrative_divisions">
-        <item>Provinces</item>
+        <item>Province</item>
         <item>Municipality</item>
-        <item>Districts</item>
+        <item>District</item>
         <item>County</item>
         <item>City</item>
         <item>Town</item>

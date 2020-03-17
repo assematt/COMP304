@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Geographical Entities</string>
     <string name="search_entity_button">Search Entity</string>
+    <string name="about_canada_button">About Canada</string>
     <string-array name="administrative_divisions">
         <item>Provinces</item>
         <item>Municipality</item>
@@ -11,4 +12,28 @@
         <item>Village</item>
         <item>Ward</item>
     </string-array>
+    <string-array name="about_canada_options">
+        <item>Choose an item from the list</item>
+        <item>Canada’s Weather</item>
+        <item>Canada’s Educational System</item>
+    </string-array>
+    <string name="title_activity_about_canada">AboutCanadaActivity</string>
+    <string-array name="about_canada_info">
+        <item>
+        "Canada is a country in the northern part of North America. Its ten provinces and three territories extend from the Atlantic to the Pacific and northward into the Arctic Ocean, covering 9.98 million square kilometres (3.85 million square miles), making it the world's second-largest country by total area. Its southern border with the United States, stretching some 8,891 kilometres (5,525 mi), is the world's longest bi-national land border. Canada's capital is Ottawa, and its three largest metropolitan areas are Toronto, Montreal, and Vancouver.
+As a whole, Canada is sparsely populated, with most of its land area dominated by forest and tundra. Its population is highly urbanized, with over 80 percent of its inhabitants concentrated in large and medium-sized cities, and 70 percent residing within 100 kilometres (62 mi) of the southern border. Canada's climate varies widely across its vast area, ranging from Arctic climate in the north to hot summers in the southern regions, with four distinct seasons.
+
+Various indigenous peoples inhabited what is now Canada for thousands of years before European colonization. Beginning in the 16th century, British and French expeditions explored and later settled along the Atlantic coast. As a consequence of various armed conflicts, France ceded nearly all of its colonies in North America in 1763. In 1867, with the union of three British North American colonies through Confederation, Canada was formed as a federal dominion of four provinces. This began an accretion of provinces and territories and a process of increasing autonomy from the United Kingdom. This widening autonomy was highlighted by the Statute of Westminster of 1931 and culminated in the Canada Act of 1982, which severed the vestiges of legal dependence on the British parliament.
+
+Canada is a parliamentary democracy and a constitutional monarchy in the Westminster tradition, with a monarch and a prime minister who serves as the chair of the Cabinet and head of government. The country is a realm within the Commonwealth of Nations, a member of the Francophonie and officially bilingual at the federal level. It ranks among the highest in international measurements of government transparency, civil liberties, quality of life, economic freedom, and education. It is one of the world's most ethnically diverse and multicultural nations, the product of large-scale immigration from many other countries. Canada's long and complex relationship with the United States has had a significant impact on its economy and culture.
+
+A developed country, Canada has the sixteenth-highest nominal per-capita income globally as well as the twelfth-highest ranking in the Human Development Index. Its advanced economy is the tenth-largest in the world, relying chiefly upon its abundant natural resources and well-developed international trade networks. Canada is part of several major international and intergovernmental institutions or groupings including the United Nations, NATO, the G7, the Group of Ten, the G20, the North American Free Trade Agreement and the Asia-Pacific Economic Cooperation forum."
+    </item>
+        <item>
+        "Education in Canada is for the most part provided publicly, funded and overseen by federal, provincial, and local governments.[18] Education is within provincial jurisdiction and the curriculum is overseen by the province.[19] Education in Canada is generally divided into primary education, followed by secondary education and post-secondary. Within the provinces under the ministry of education, there are district school boards administering the educational programs.[20]
+
+Education is compulsory up to the age of 16 in every province in Canada, except for Manitoba, Ontario, and New Brunswick, where the compulsory age is 18,[21][22][23][note 1] or as soon as a high school diploma has been achieved. In some provinces early leaving exemptions can be granted under certain circumstances at 14. Canada generally has 190 (180 in Quebec[24]) school days in the year, officially starting from September (after Labour Day) to the end of June (usually the last Friday of the month, except in Quebec when it is just before June 24 – Saint-Jean-Baptiste Day/Fête nationale du Québec). In British Columbia secondary schools, there are 172 school days during a school year. (2013-2014).[25] In Alberta, high school students get an additional four weeks off to accommodate for exam break; two weeks in January, and two in June. Classes typically end on the 15th of those two months. "
+    </item>
+    </string-array>
+
 </resources>

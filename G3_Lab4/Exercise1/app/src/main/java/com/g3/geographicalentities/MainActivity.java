@@ -63,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void loadAboutCanadaView(View view)
+    {
+        Intent aboutCanada_intent = new Intent(MainActivity.this, AboutCanadaActivity.class);
+        startActivity(aboutCanada_intent);
+    }
+
     public void loadListView(View view)
     {
         Intent listview_intent = new Intent(MainActivity.this, ListActivity.class);

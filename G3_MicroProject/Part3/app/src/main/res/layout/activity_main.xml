@@ -20,6 +20,9 @@
     <ListView
         android:id="@+id/songList"
         android:layout_width="412dp"
-        android:layout_height="339dp" />
+        android:layout_height="339dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

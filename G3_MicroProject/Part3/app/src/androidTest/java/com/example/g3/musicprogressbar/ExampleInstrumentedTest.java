@@ -1,4 +1,4 @@
-package com.example.part3;
+package com.example.g3.musicprogressbar;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.part3", appContext.getPackageName());
+        assertEquals("com.example.g3.musicprogressbar", appContext.getPackageName());
     }
 }

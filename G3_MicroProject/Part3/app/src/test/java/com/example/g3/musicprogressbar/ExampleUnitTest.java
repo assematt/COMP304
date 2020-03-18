@@ -1,4 +1,4 @@
-package com.example.part3;
+package com.example.g3.musicprogressbar;
 
 import org.junit.Test;
 

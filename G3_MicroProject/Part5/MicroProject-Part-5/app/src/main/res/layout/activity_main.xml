@@ -76,10 +76,12 @@
             android:layout_gravity="center"
             android:layout_weight="1">
             <EditText
+                android:id="@+id/edtLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true" />
             <EditText
+                android:id="@+id/edtLogPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

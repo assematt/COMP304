@@ -20,10 +20,10 @@ public class UserRegistration extends AppCompatActivity {
   private final String dbName = "user_score";
   private final String dbTableCreate = "CREATE TABLE IF NOT EXISTS USER" +
           "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-          "USERNAME TEXT," +
-          "PASSWORD TEXT," +
+          "USERNAME TEXT NOT NULL," +
+          "PASSWORD TEXT NOT NULL," +
           "SCORE INTEGER," +
-          "USERPICTURE LONGBLOB);"; /*Table Creation*/
+          "USERPICTURE OBJECT);"; /*Table Creation*/
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +39,12 @@ public class UserRegistration extends AppCompatActivity {
     final EditText edtPassword = (EditText) findViewById(R.id.edtPassword);
     btnRegister.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        /*Calling method from main class*/
-        checkAndAdd(edtName, edtPassword);
-        loadRegistration(v);
+        /*Check empty field and then check db*/
+        if(validateFields(edtName, edtPassword)){
+          if(validateDB(edtName, edtPassword)){
+            loadRegistration(v);
+          }
+        }
       } //  onClick
     });
   } //  onCreate
@@ -59,51 +62,68 @@ public class UserRegistration extends AppCompatActivity {
     } //  tryCatch
   } //  createDb
 
-  public void insertEntry(String userName, String password){
+  public Boolean insertEntry(String userName, String password){
+    Boolean bool = false;
     try{
-      ContentValues newValues = new ContentValues();
-      newValues.put("USERNAME", userName);
-      newValues.put("PASSWORD", password);
+      String insertQuery = "INSERT INTO USER (USERNAME, PASSWORD, SCORE, USERPICTURE) VALUES" +
+              "('"+userName+"','"+ password+"'," + 0 +","+"NULL)";
+      UserScore.execSQL(insertQuery);
+      bool = true;
       //  Store image
       Toast.makeText(this, userName + " added successfully!", Toast.LENGTH_LONG).show();
     } catch (Exception e){
       Log.e("Note", "Exception: " + e);
-      Toast.makeText(this, "Error, Check log!", Toast.LENGTH_LONG).show();
+      Toast.makeText(this, "Check log (Note)!", Toast.LENGTH_LONG).show();
     } //  tryCatch
-  } //  InsertUserName
+    return bool;
+  } //  insertEntry
 
   public void loadRegistration(View view) {
-    Intent intent = new Intent(this, MainActivity.class);
-    startActivity(intent);
+    if(insertEntry(userName, password)){
+      Intent intent = new Intent(this, MainActivity.class);
+      startActivity(intent);
+      UserScore.close();
+    }
   } //  loadRegistration
 
-    /*Check
-    * 1. Already Exists
-    * 2. Wrong Input*/
-  public void checkAndAdd(EditText name, EditText pass){
+  /*Validate registration details*/
+  public Boolean validateFields(EditText name, EditText pass){
+    Boolean bool = false;
+    if(name.getText().toString().trim().length()==0){
+      name.setError("Username is not entered");
+      name.requestFocus();
+    } //  emptyUser
+    if(pass.getText().toString().trim().length()==0){
+      pass.setError("Password is not entered");
+      pass.requestFocus();
+    } //  emptyPass
+    else{
+      bool = true;
+    }
+    return bool;
+  } //  validateField
+  public Boolean validateDB(EditText name, EditText pass){
+    Boolean bool = false;
     try{
       userName = name.getText().toString().toLowerCase();
       password = pass.getText().toString();
-      String query = "SELECT * FROM USER";
-      UserScore.execSQL(query);
+      String query = "SELECT * FROM USER WHERE USERNAME = '" + userName + "' AND PASSWORD = '" + password + "'";
       Cursor rs = UserScore.rawQuery(query, null);
       rs.moveToFirst();
       /*Multiple entries check doesn't work*/
-      do {
-        if(rs.equals(userName)){
-          Toast.makeText(this, "The username already exists!", Toast.LENGTH_SHORT).show();
-        } //  Already Exists
-        else{
-          insertEntry(userName, hashedPass(password));
-        } //  else
-      } while(rs.moveToNext());
+      if(rs.getCount()>0){
+        Toast.makeText(this, "The username already exists!", Toast.LENGTH_SHORT).show();
+      } //  Already Exists
+      else{
+        bool=true;
+      }
     } catch(Exception e){
-      Toast.makeText(this, "Check log!", Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, "Check log (userCheck)!", Toast.LENGTH_SHORT).show();
       Log.e("userCheck", "Exception: " + e);
     } //  tryCatch
-  } //  Check
+    return bool;
+  } //  validateDB
 
-  /*Salting password to store in db*/
   private String hashedPass(String password){
     String securedPass = null;
     try{

@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,17 +25,22 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    /*Registration button*/
+    openDatabase();
+    final EditText edtLogin = (EditText) findViewById(R.id.edtLogin);
+    final EditText edtPassword = (EditText) findViewById(R.id.edtLogPass);
+    /*Login*/
     Button btnLogin = (Button) findViewById(R.id.btnLogin);
     btnLogin.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        /*Login steps here*/
+        /*Check empty field and then check db*/
+        if(validateFields(edtLogin, edtPassword)){
+          if(validateDB(edtLogin, edtPassword)){
+            loadLogin(v);
+          }
+        }
       } //  onClick
     }); //  btnLogin
-    /*btn Register END*/
-
     /*Adding link to textView*/
     TextView tvRegister = (TextView) findViewById(R.id.tvRegister);
     tvRegister.setOnClickListener(new View.OnClickListener(){
@@ -40,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
         loadRegistration(v);
       } //  onClick
     }); //  tvRegister
-    /*TextView link END*/
-
   } //  onCreate
 
   public void openDatabase(){
@@ -53,37 +59,13 @@ public class MainActivity extends AppCompatActivity {
      * Overall score(Integer),
      * UserPicture(LONGBLOB)*/
     try {
-      Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
       UserScore = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath("user_score").getPath(), null, SQLiteDatabase.OPEN_READONLY);
+      Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
     } catch (Exception e) {
-      //Create database
-      Toast.makeText(this, "Database created successfully!", Toast.LENGTH_LONG).show();
-      UserScore = openOrCreateDatabase("user_score", MODE_PRIVATE, null);
+      Log.e("DbError", "Exception: " + e);
+      Toast.makeText(this, "DB error, check log!", Toast.LENGTH_LONG).show();
     } //  tryCatch
   } //  createDb
-
-  public void insertEntry(){
-    try{
-
-      int score = calculateScore();
-      ContentValues newValues = new ContentValues();
-      newValues.put("SCORE", score);
-      Toast.makeText(this, "Score has been updated!", Toast.LENGTH_LONG).show();
-      //  Store image
-    } catch (Exception e){
-      Log.e("Note", "Exception: " + e);
-      Toast.makeText(this, "Error, Check log!", Toast.LENGTH_LONG).show();
-    } //  tryCatch
-  } //  InsertUserName
-
-//  public Object getImage(){
-//    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//    startActivityForResult(intent, CAMERA);
-//  } //  getImage
-
-  public int calculateScore(){
-    return 0;
-  } //  calculateScore
 
   /*Open registration activity*/
   public void loadRegistration(View view) {
@@ -143,11 +125,49 @@ public class MainActivity extends AppCompatActivity {
 
   } //  btnActive
 
-  /*CHECK*/
-  /*Doesn't exists*/
+  public Boolean validateFields(EditText name, EditText pass){
+    Boolean bool = false;
+    if(name.getText().toString().trim().length()==0){
+      name.setError("Username is not entered");
+      name.requestFocus();
+    } //  emptyUser
+    if(pass.getText().toString().trim().length()==0){
+      pass.setError("Password is not entered");
+      pass.requestFocus();
+    } //  emptyPass
+    else{
+      bool = true;
+    }
+    return bool;
+  } //  validateField
+  public Boolean validateDB(EditText name, EditText pass){
+    Boolean bool = false;
+    try{
+      userName = name.getText().toString().toLowerCase();
+      password = pass.getText().toString();
+      String query = "SELECT * FROM USER WHERE USERNAME = '" + userName + "' AND PASSWORD = '" + password + "'";
+      Cursor rs = UserScore.rawQuery(query, null);
+      if(rs.getCount()>0){
+        bool = true;
+      } else if(rs.getCount()==0){
+        Toast.makeText(this, "Wrong details", Toast.LENGTH_SHORT).show();
+      } //  elseIf
+    } catch(Exception e){
+      Toast.makeText(this, "Check log (loginCheck)!", Toast.LENGTH_SHORT).show();
+      Log.e("loginCheck", "Exception: " + e);
+    } //  tryCatch
+    return bool;
+  } //  validateDB
 
-  /*Incorrect Password*/
-
-  /**/
+  private String hashedPass(String password){
+    String securedPass = null;
+    try{
+      securedPass = password + "1";
+    } catch(Exception e){
+      Log.e("ErrorPass", "Exception: " + e);
+      Toast.makeText(this, "Pass error, Check log!", Toast.LENGTH_SHORT).show();
+    } //  tryCatch
+    return securedPass;
+  } //  passWordLogic
 
 } //  classEnd

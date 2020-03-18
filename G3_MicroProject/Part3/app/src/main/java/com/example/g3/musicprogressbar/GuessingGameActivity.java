@@ -94,7 +94,7 @@ public class GuessingGameActivity extends AppCompatActivity
         }.start();
 
         Random random = new Random();
-        randNum = random.nextInt(100); // get a random number from 1-100
+        randNum = random.nextInt(100); // get a random number from 0-100
 
         Button btnGuess = (Button) findViewById( R.id.btnGuess );
 

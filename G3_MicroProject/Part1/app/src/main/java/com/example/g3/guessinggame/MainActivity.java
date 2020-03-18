@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         setContentView( R.layout.activity_main );
 
         Random random = new Random();
-        randNum = random.nextInt(100); // get a random number from 1-100
+        randNum = random.nextInt(100); // get a random number from 0-100
 
         Log.d(TAG,"randNum: " + randNum);
 

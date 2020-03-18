@@ -19,6 +19,18 @@
         <activity
             android:name=".UserRegistration"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".GuessingGame"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".HighScore"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Music"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".OurGame"
+            android:parentActivityName=".MainActivity" />
     </application>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name=

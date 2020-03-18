@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity
 
     public void playMusic(View view)
     {
-        Intent intent = new Intent(this, GuessingGame.class);
+        Intent intent = new Intent(this, GuessingGameActivity.class);
         intent.putExtra("musicToPlay", musicToPlay);
         startActivity(intent);
     }

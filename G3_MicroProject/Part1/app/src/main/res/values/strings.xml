@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GuessingGame</string>
+    <string name="app_name">Guessing Game</string>
     <string name="Score">Your score is: </string>
     <string name="Chance">Remaining chances are:\n</string>
     <string name="winMessage">CONGRATULATION! You\'ve won</string>

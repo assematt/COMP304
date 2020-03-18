@@ -6,20 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/startBtn"
-        android:layout_width="0dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="436dp"
-        android:onClick="playMusic"
-        android:text="Start"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/songList"
-        android:layout_width="412dp"
-        android:layout_height="339dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

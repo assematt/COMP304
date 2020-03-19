@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,7 +21,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -85,9 +83,6 @@ public class HangmanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hangman);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         Button btnGuess = (Button) findViewById( R.id.btnGuess );
         btnGuess.setVisibility(View.INVISIBLE);
 
@@ -101,6 +96,41 @@ public class HangmanActivity extends AppCompatActivity
         GridView numGrid = (GridView) findViewById(R.id.numGrid);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,numbers);
         numGrid.setAdapter(adapter);
+        /*numGrid.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,numbers) {
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                // Return the GridView current item as a View
+                View view = super.getView(position, convertView, parent);
+
+                // Convert the view as a TextView widget
+                TextView tv = (TextView) view;
+
+                // Set the layout parameters for TextView widget
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT
+                );
+                tv.setLayoutParams(lp);
+
+                // Get the TextView LayoutParams
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tv.getLayoutParams();
+
+                // Set the TextView layout parameters
+                tv.setLayoutParams(params);
+
+                // Display TextView text in center position
+                tv.setGravity(Gravity.CENTER);
+
+                // Set the TextView text font family and text size
+                tv.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 4);
+
+                // Set the TextView text (GridView item text)
+                tv.setText(numberList.get(position));
+
+                // Return the TextView widget as GridView item
+                return tv;
+            }
+        });*/
 
         if(musicToPlay.equals("Song 1"))
         {

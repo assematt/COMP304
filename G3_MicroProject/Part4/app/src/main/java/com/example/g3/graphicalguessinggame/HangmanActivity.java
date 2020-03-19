@@ -2,36 +2,46 @@ package com.example.g3.graphicalguessinggame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Debug;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
-public class GuessingGameActivity extends AppCompatActivity
+public class HangmanActivity extends AppCompatActivity
 {
     private static final String TAG = "GuessingGame";
 
-    static final String[] numbers  = new String[]{"1","2","3","4","5","6","7","8","9","10",
+    static final String[] numbers  = new String[]{
+            "1","2","3","4","5","6","7","8","9","10",
             "11","12","13","14","15","16","17","18","19","20",
             "21","22","23","24","25","26","27","28","29","30",
             "31","32","33","34","35","36","37","38","39","40",
@@ -41,8 +51,10 @@ public class GuessingGameActivity extends AppCompatActivity
             "71","72","73","74","75","76","77","78","79","80",
             "81","82","83","84","85","86","87","88","89","90",
             "91","92","93","94","95","96","97","98","99","100",
-
     };
+
+    // Populate a List from Array elements
+    final List<String> numberList = new ArrayList<String>(Arrays.asList(numbers));
 
     int randNum;                     // random number
     int attempts = 10;               // number of attempts/chances
@@ -66,9 +78,10 @@ public class GuessingGameActivity extends AppCompatActivity
 
     ProgressBar progressBar;         // progress bar
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guessing_game);
+        setContentView(R.layout.activity_hangman);
 
         Button btnGuess = (Button) findViewById( R.id.btnGuess );
         btnGuess.setVisibility(View.INVISIBLE);
@@ -82,7 +95,6 @@ public class GuessingGameActivity extends AppCompatActivity
 
         GridView numGrid = (GridView) findViewById(R.id.numGrid);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,numbers);
-
         numGrid.setAdapter(adapter);
 
         if(musicToPlay.equals("Song 1"))
@@ -142,20 +154,6 @@ public class GuessingGameActivity extends AppCompatActivity
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-
-                TextView tv = (TextView) view;
-
-                Log.d( TAG, "selectedItem: " + selectedItem);
-                Log.d( TAG, "tv.isActivated: " + tv.isActivated());
-                Log.d( TAG, "tv.isPressed: " + tv.isPressed());
-                Log.d( TAG, "tv.isSelected: " + tv.isSelected());
-                Log.d( TAG, "tv.isFocused: " + tv.isFocused());
-                Log.d( TAG, "tv.isEnabled: " + tv.isEnabled());
-                Log.d( TAG, "tv.isHovered: " + tv.isHovered());
-                Log.d( TAG, "Position: " + position);
-                Log.d( TAG, "Id: " + id);
-
                 if( timeNotExhausted ) // if the time limit is not reached yet, user is allowed to guess
                 {
                     int number = Integer.parseInt(((TextView)view).getText().toString());
@@ -163,15 +161,15 @@ public class GuessingGameActivity extends AppCompatActivity
 
                     if( result < 0 )
                     {
-                        tv.setBackgroundColor(0xFFFFFF00);
+                        view.setBackgroundColor(0xFFFFFF00);
                     }
                     else if( result > 0 )
                     {
-                        tv.setBackgroundColor(0xFFD86565);
+                        view.setBackgroundColor(0xFFD86565);
                     }
                     else
                     {
-                        tv.setBackgroundColor(0xFF90EE90);
+                        view.setBackgroundColor(0xFF90EE90);
                         timeNotExhausted = false;
                         progressBar.setProgress(0);
                         mediaPlayer.stop();
@@ -378,5 +376,13 @@ public class GuessingGameActivity extends AppCompatActivity
         }
 
         holder.unlockCanvasAndPost(canvas);
+    }
+
+    // Method for converting DP value to pixels
+    public static int getPixelsFromDPs(Activity activity, int dps){
+        Resources r = activity.getResources();
+        int  px = (int) (TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dps, r.getDisplayMetrics()));
+        return px;
     }
 }

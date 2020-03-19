@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Music" />
-<!--Music-->
-</androidx.constraintlayout.widget.ConstraintLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center" >
+    <Button
+        android:id="@+id/songBtn1"
+        android:text="@string/songBtn1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:background="@drawable/gradient"
+        android:textColor="#FFFFFF"
+        android:gravity="center" />
+    <Button
+        android:id="@+id/songBtn2"
+        android:text="@string/songBtn2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:background="@drawable/gradient"
+        android:textColor="#FFFFFF"
+        android:gravity="center" />
+    <Button
+        android:id="@+id/songBtn3"
+        android:text="@string/songBtn3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:background="@drawable/gradient"
+        android:textColor="#FFFFFF"
+        android:gravity="center" />
+    <Button
+        android:id="@+id/btnStopSong"
+        android:text="@string/stop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:background="@drawable/gradient"
+        android:textColor="#FFFFFF"
+        android:gravity="center" />
+</LinearLayout>

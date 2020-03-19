@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
       Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
     } catch (Exception e) {
       Log.e("DbError", "Exception: " + e);
-      Toast.makeText(this, "DB error, check log!", Toast.LENGTH_LONG).show();
+      Toast.makeText(this, "Check log (DbError)!", Toast.LENGTH_LONG).show();
     } //  tryCatch
   } //  createDb
 
@@ -78,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
     Intent intent = new Intent(getApplicationContext(), UserRegistration.class);
     startActivity(intent);
   } //  loadRegistration
+
+  /*Temp*/
+  public void loadMusic(View view){
+    Intent intent = new Intent(getApplicationContext(), Music.class);
+    startActivity(intent);
+  } //  loadMusic
+  /*Temp*/
 
   /*logs in displaying userData including scores*/
   public void loadLogin(View view)  {

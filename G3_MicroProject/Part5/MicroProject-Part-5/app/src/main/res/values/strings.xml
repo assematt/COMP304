@@ -10,4 +10,9 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
+    <!--Music.xml-->
+    <string name="songBtn1">SONG #1</string>
+    <string name="songBtn2">SONG #2</string>
+    <string name="songBtn3">SONG #3</string>
+    <string name="stop">STOP</string>
 </resources>

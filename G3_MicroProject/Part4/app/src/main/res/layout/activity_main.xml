@@ -8,10 +8,11 @@
 
     <Button
         android:id="@+id/startBtn"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="436dp"
+        android:layout_marginStart="356dp"
+        android:layout_marginTop="172dp"
+        android:gravity="center"
         android:onClick="playMusic"
         android:text="Start"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +21,10 @@
     <ListView
         android:id="@+id/songList"
         android:layout_width="0dp"
-        android:layout_height="339dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

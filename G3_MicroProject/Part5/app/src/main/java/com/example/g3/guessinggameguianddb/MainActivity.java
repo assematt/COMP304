@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +33,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = new SQLiteDatabaseHandler(this);
-        //openDatabase();
+        openDatabase();
 
         edtLogin = (EditText) findViewById(R.id.edtLogin);
         edtPassword = (EditText) findViewById(R.id.edtLogPass);
@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity
     {
         /*Create DB - UserScore
          * Tables - User
-         * Fields - ID (Integer)[Primary Key],
-         * Username(String),
+         * Fields - Username(String),
          * Password(String){After logic},
          * Overall score(Integer),
          * UserPicture(BLOB)*/
@@ -89,6 +88,9 @@ public class MainActivity extends AppCompatActivity
 
             // Create User table
             UserScore.execSQL("CREATE TABLE IF NOT EXISTS User (Username VARCHAR(50), Password VARCHAR(50), Overall_Score INTEGER, User_Picture BLOB)");
+
+            // Insert Test User
+            //UserScore.execSQL("INSERT INTO User values('Test', '1234567', 0, '')");
         }
     }
 
@@ -109,16 +111,15 @@ public class MainActivity extends AppCompatActivity
     public void loadLogin(View view)
     {
         imageActive();
-
-        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-
-        startActivity(intent);
     }
 
     /*Activating clickable images*/
     public void imageActive()
     {
-        Toast.makeText(this, "Images activated!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Images activated!", Toast.LENGTH_LONG).show();
+
+        LinearLayout ll_clickable_frames = (LinearLayout) findViewById(R.id.ll_clickable_frames);
+        ll_clickable_frames.setVisibility(View.VISIBLE);
 
         /*Set onClickListeners*/
         imgGuessingGame.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +186,8 @@ public class MainActivity extends AppCompatActivity
             userName = edtLogin.getText().toString().toLowerCase();
             password = edtPassword.getText().toString();
 
-            String query = "SELECT * FROM User WHERE Username = '" + userName + "' AND Password = '" + password + "'";
+            String query = "SELECT * FROM User WHERE lower(Username) = '" + userName + "' AND Password = '" + password + "'";
+            Log.d("validateDB", "Query: " + query);
             Cursor rs = UserScore.rawQuery(query, null);
 
             if(rs.getCount()>0)
@@ -205,22 +207,4 @@ public class MainActivity extends AppCompatActivity
 
         return bool;
     }
-
-    private String hashedPass(String password)
-    {
-        String securedPass = null;
-
-        try
-        {
-            securedPass = password + "1";
-        }
-        catch(Exception e)
-        {
-            Log.e("ErrorPass", "Exception: " + e);
-            Toast.makeText(this, "Pass error, Check log!", Toast.LENGTH_SHORT).show();
-        } //  tryCatch
-
-        return securedPass;
-    } //  passWordLogic
-
 } //  classEnd

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class SQLiteDatabaseHandler extends SQLiteOpenHelper
 {
@@ -32,16 +33,16 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // you can implement here migration process
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        // db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         this.onCreate(db);
     }
 
-    public User getUser(String userName) {
+    public User getUser(String userName, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, // a. table
                 COLUMNS, // b. column names
-                " id = ?", // c. selections
-                new String[] { String.valueOf(userName) }, // d. selections args
+                " Username = ? AND  Password = ?", // c. selections
+                new String[] { String.valueOf(userName), String.valueOf(password) }, // d. selections args
                 null, // e. group by
                 null, // f. having
                 null, // g. order by
@@ -61,6 +62,9 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper
 
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+        Log.d("addUser", "Im adding user.");
+
         ContentValues values = new ContentValues();
         values.put(KEY_USERNAME, user.getUsername());
         values.put(KEY_PASSWORD, user.getPassword());

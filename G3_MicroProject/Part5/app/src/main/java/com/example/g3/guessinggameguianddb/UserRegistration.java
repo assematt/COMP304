@@ -36,7 +36,7 @@ public class UserRegistration extends AppCompatActivity {
       public void onClick(View v) {
         /*Calling method from main class*/
         checkAndAdd(edtName, edtPassword);
-        loadRegistration(v);
+        //loadRegistration(v);
       } //  onClick
     });
   } //  onCreate
@@ -58,8 +58,10 @@ public class UserRegistration extends AppCompatActivity {
   public void insertEntry(String userName, String password){
     try{
       ContentValues newValues = new ContentValues();
-      newValues.put("USERNAME", userName);
-      newValues.put("PASSWORD", password);
+      newValues.put("Username", userName);
+      newValues.put("Password", password);
+      UserScore.insert("User", null, newValues);
+
       //  Store image
       Toast.makeText(this, userName + " added successfully!", Toast.LENGTH_LONG).show();
     } catch (Exception e){
@@ -81,7 +83,6 @@ public class UserRegistration extends AppCompatActivity {
       userName = name.getText().toString().toLowerCase();
       password = pass.getText().toString();
       String query = "SELECT * FROM USER";
-      UserScore.execSQL(query);
       Cursor rs = UserScore.rawQuery(query, null);
       rs.moveToFirst();
       /*Multiple entries check doesn't work*/
@@ -90,7 +91,7 @@ public class UserRegistration extends AppCompatActivity {
           Toast.makeText(this, "The username already exists!", Toast.LENGTH_SHORT).show();
         } //  Already Exists
         else{
-          insertEntry(userName, hashedPass(password));
+          insertEntry(userName, password);
         } //  else
       } while(rs.moveToNext());
     } catch(Exception e){
@@ -98,17 +99,4 @@ public class UserRegistration extends AppCompatActivity {
       Log.e("userCheck", "Exception: " + e);
     } //  tryCatch
   } //  Check
-
-  /*Salting password to store in db*/
-  private String hashedPass(String password){
-    String securedPass = null;
-    try{
-      securedPass = password + "1";
-    } catch(Exception e){
-      Log.e("ErrorPass", "Exception: " + e);
-      Toast.makeText(this, "Pass error, Check log!", Toast.LENGTH_SHORT).show();
-    } //  tryCatch
-    return securedPass;
-  } //  passWordLogic
-
 } //  classEnd

@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
      * UserPicture(LONGBLOB)*/
     try {
       UserScore = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath(dbName).getPath(), null, SQLiteDatabase.OPEN_READONLY);
-      Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
+      Toast.makeText(this, "Database connection success!", Toast.LENGTH_SHORT).show();
     } catch (Exception e) {
       Log.e("DbError", "Exception: " + e);
       Toast.makeText(this, "Check log (DbError)!", Toast.LENGTH_LONG).show();
@@ -84,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
     Intent intent = new Intent(getApplicationContext(), Music.class);
     startActivity(intent);
   } //  loadMusic
+  public void loadScore(View view){
+    Intent intent = new Intent(getApplicationContext(), HighScore.class);
+    intent.putExtra("userName", userName);
+    intent.putExtra("password", password);
+    startActivity(intent);
+  } //  loadScore
   /*Temp*/
 
   /*logs in displaying userData including scores*/
@@ -95,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
   /*Activating clickable images*/
   public void imageActive(){
-    Toast.makeText(this, "Images activated!", Toast.LENGTH_LONG).show();
+    Toast.makeText(this, "Images activated!", Toast.LENGTH_SHORT).show();
 
     /*Set onClickListeners*/
     imgGuessingGame.setOnClickListener(new View.OnClickListener() {

@@ -155,7 +155,8 @@
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/imgHighScore"
-                android:clickable="false"
+                android:clickable="true"
+                android:onClick="loadScore"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/highscore" />

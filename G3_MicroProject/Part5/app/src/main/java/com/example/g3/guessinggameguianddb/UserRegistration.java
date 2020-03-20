@@ -18,12 +18,7 @@ public class UserRegistration extends AppCompatActivity {
   private String password;
   private static SQLiteDatabase UserScore;  /*Database - Object*/
   private final String dbName = "user_score";
-  private final String dbTableCreate = "CREATE TABLE IF NOT EXISTS USER" +
-          "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-          "USERNAME TEXT," +
-          "PASSWORD TEXT," +
-          "SCORE INTEGER," +
-          "USERPICTURE LONGBLOB);"; /*Table Creation*/
+  private final String dbTableCreate = "CREATE TABLE IF NOT EXISTS User (Username VARCHAR(50), Password VARCHAR(50), Overall_Score INTEGER, User_Picture BLOB)"; /*Table Creation*/
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +45,9 @@ public class UserRegistration extends AppCompatActivity {
     try {
       UserScore = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath(name).getPath(), null, SQLiteDatabase.OPEN_READWRITE);
       Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
-      UserScore.execSQL(dbTableCreate);
-    } catch (Exception e) {
+    }
+    catch (Exception e)
+    {
       //Create database
       UserScore = openOrCreateDatabase(name, MODE_PRIVATE, null);
       Toast.makeText(this, "Database created successfully!", Toast.LENGTH_LONG).show();

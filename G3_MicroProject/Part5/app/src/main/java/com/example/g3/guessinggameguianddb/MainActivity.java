@@ -23,78 +23,101 @@ public class MainActivity extends AppCompatActivity
     EditText edtLogin, edtPassword;
     Button btnLogin;
     ImageView imgGuessingGame, imgMusic, imgHighScore, imgOurGame;
+
+    private static SQLiteDatabaseHandler db;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        openDatabase();
+
+        db = new SQLiteDatabaseHandler(this);
+        //openDatabase();
+
         edtLogin = (EditText) findViewById(R.id.edtLogin);
         edtPassword = (EditText) findViewById(R.id.edtLogPass);
         imgGuessingGame = (ImageView) findViewById(R.id.imgGuessingGame);
         imgMusic = (ImageView) findViewById(R.id.imgMusic);
         imgHighScore = (ImageView) findViewById(R.id.imgHighScore);
         imgOurGame = (ImageView) findViewById(R.id.imgOurGame);
+
         /*Login*/
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Check empty field and then check db*/
-                if(validateFields()){
-                    if(validateDB()){
+                /* Check empty field and then check db */
+                if( validateFields() ){
+                    if( validateDB() ){
                         loadLogin(v);
                     }
                 }
-            } //  onClick
-        }); //  btnLogin
+            }
+        });
+
         /*Adding link to textView*/
         TextView tvRegister = (TextView) findViewById(R.id.tvRegister);
         tvRegister.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+            public void onClick(View v)
+            {
                 loadRegistration(v);
-            } //  onClick
-        }); //  tvRegister
-    } //  onCreate
+            }
+        });
+    }
 
-    public void openDatabase(){
+    public void openDatabase()
+    {
         /*Create DB - UserScore
          * Tables - User
          * Fields - ID (Integer)[Primary Key],
          * Username(String),
          * Password(String){After logic},
          * Overall score(Integer),
-         * UserPicture(LONGBLOB)*/
-        try {
+         * UserPicture(BLOB)*/
+        try // if the database exits, skip creating it
+        {
             UserScore = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath(dbName).getPath(), null, SQLiteDatabase.OPEN_READONLY);
             Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
+        }
+        catch (Exception e) // if the database doesn't exist, create the database
+        {
             Log.e("DbError", "Exception: " + e);
-            Toast.makeText(this, "Check log (DbError)!", Toast.LENGTH_LONG).show();
-        } //  tryCatch
-    } //  createDb
 
-    /*Open registration activity*/
-    public void loadRegistration(View view) {
+            // Create database
+            UserScore = openOrCreateDatabase(dbName, MODE_PRIVATE, null);
+
+            // Create User table
+            UserScore.execSQL("CREATE TABLE IF NOT EXISTS User (Username VARCHAR(50), Password VARCHAR(50), Overall_Score INTEGER, User_Picture BLOB)");
+        }
+    }
+
+    /* Open registration activity */
+    public void loadRegistration(View view)
+    {
         Intent intent = new Intent(getApplicationContext(), UserRegistration.class);
         startActivity(intent);
-    } //  loadRegistration
+    }
 
-    /*Temp*/
-    public void loadMusic(View view){
+    public void loadMusic(View view)
+    {
         Intent intent = new Intent(getApplicationContext(), Music.class);
         startActivity(intent);
-    } //  loadMusic
-    /*Temp*/
+    }
 
     /*logs in displaying userData including scores*/
-    public void loadLogin(View view)  {
+    public void loadLogin(View view)
+    {
         imageActive();
+
         Intent intent = new Intent(MainActivity.this, MainActivity.class);
+
         startActivity(intent);
-    } //  loadLogin
+    }
 
     /*Activating clickable images*/
-    public void imageActive(){
+    public void imageActive()
+    {
         Toast.makeText(this, "Images activated!", Toast.LENGTH_LONG).show();
 
         /*Set onClickListeners*/
@@ -103,74 +126,100 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GuessingGame.class);
                 startActivity(intent);
-            } //  onClick
+            }
         });
+
         imgHighScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, HighScore.class);
                 startActivity(intent);
-            } //  onClick
+            }
         });
+
         imgMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Music.class);
                 startActivity(intent);
-            } //  onClick
+            }
         });
+
         imgOurGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, OurGame.class);
                 startActivity(intent);
-            } //  onClick
+            }
         });
+    }
 
-    } //  imageActive
-
-    public Boolean validateFields(){
+    public Boolean validateFields()
+    {
         Boolean bool = false;
-        if(edtLogin.getText().toString().trim().length()==0){
+
+        if( edtLogin.getText().toString().trim().length()==0 )
+        {
             edtLogin.setError("Username is not entered");
             edtLogin.requestFocus();
-        } //  emptyUser
-        if(edtPassword.getText().toString().trim().length()==0){
+        }
+        if( edtPassword.getText().toString().trim().length()==0 )
+        {
             edtPassword.setError("Password is not entered");
             edtPassword.requestFocus();
-        } //  emptyPass
-        else{
+        }
+        else
+        {
             bool = true;
         }
+
         return bool;
-    } //  validateField
-    public Boolean validateDB(){
+    }
+
+    public Boolean validateDB()
+    {
         Boolean bool = false;
-        try{
+
+        try
+        {
             userName = edtLogin.getText().toString().toLowerCase();
             password = edtPassword.getText().toString();
-            String query = "SELECT * FROM USER WHERE USERNAME = '" + userName + "' AND PASSWORD = '" + password + "'";
+
+            String query = "SELECT * FROM User WHERE Username = '" + userName + "' AND Password = '" + password + "'";
             Cursor rs = UserScore.rawQuery(query, null);
-            if(rs.getCount()>0){
+
+            if(rs.getCount()>0)
+            {
                 bool = true;
-            } else if(rs.getCount()==0){
+            }
+            else if(rs.getCount()==0)
+            {
                 Toast.makeText(this, "Wrong details", Toast.LENGTH_SHORT).show();
-            } //  elseIf
-        } catch(Exception e){
+            }
+        }
+        catch(Exception e)
+        {
             Toast.makeText(this, "Check log (loginCheck)!", Toast.LENGTH_SHORT).show();
             Log.e("loginCheck", "Exception: " + e);
-        } //  tryCatch
-        return bool;
-    } //  validateDB
+        }
 
-    private String hashedPass(String password){
+        return bool;
+    }
+
+    private String hashedPass(String password)
+    {
         String securedPass = null;
-        try{
+
+        try
+        {
             securedPass = password + "1";
-        } catch(Exception e){
+        }
+        catch(Exception e)
+        {
             Log.e("ErrorPass", "Exception: " + e);
             Toast.makeText(this, "Pass error, Check log!", Toast.LENGTH_SHORT).show();
         } //  tryCatch
+
         return securedPass;
     } //  passWordLogic
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
@@ -94,7 +95,7 @@ public class HangmanActivity extends AppCompatActivity
         musicToPlay = intent.getStringExtra("musicToPlay");
 
         GridView numGrid = (GridView) findViewById(R.id.numGrid);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,numbers);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.grid_text_view,numbers);
         numGrid.setAdapter(adapter);
         /*numGrid.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,numbers) {
             public View getView(int position, View convertView, ViewGroup parent) {

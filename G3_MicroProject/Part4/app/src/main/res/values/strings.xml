@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Graphical Guessing Game</string>
     <string name="Score">Your score is: </string>
-    <string name="Chance">Remaining chances are:\n</string>
+    <string name="Chance">Remaining attempts:</string>
     <string name="winMessage">CONGRATULATION! You\'ve won</string>
     <string name="loseMessage">SORRY GAME OVER</string>
     <string name="greatMessage">The number you have entered is greater than the number chosen by the program</string>

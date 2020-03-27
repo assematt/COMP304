@@ -2,7 +2,9 @@ package com.example.g3.guessinggameguianddb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -17,15 +19,20 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
 {
+    private static final String TAG = "MainActivity";
+
     private String userName;
     private String password;
-    private static SQLiteDatabase UserScore;
+    public static SQLiteDatabase UserScore;
     private final String dbName = "user_score";
     EditText edtLogin, edtPassword;
     Button btnLogin;
-    ImageView imgGuessingGame, imgMusic, imgHighScore, imgOurGame;
+    ImageView imgGuessingGame, imgMusic, imgHighScore;
+    String user = "";
 
-    private static SQLiteDatabaseHandler db;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,24 +40,52 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        openDatabase();
+        createDatabase();
 
         edtLogin = (EditText) findViewById(R.id.edtLogin);
         edtPassword = (EditText) findViewById(R.id.edtLogPass);
         imgGuessingGame = (ImageView) findViewById(R.id.imgGuessingGame);
         imgMusic = (ImageView) findViewById(R.id.imgMusic);
         imgHighScore = (ImageView) findViewById(R.id.imgHighScore);
-        imgOurGame = (ImageView) findViewById(R.id.imgOurGame);
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        user = sharedpreferences.getString("username", "-");
+
+        Log.d(TAG, "user: " + user);
 
         /*Login*/
         btnLogin = (Button) findViewById(R.id.btnLogin);
+
+        if( user != "" && user != "-" )
+        {
+            Log.d(TAG, "Got here !user.isEmpty()");
+            loadLogin();
+        }
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* Check empty field and then check db */
-                if( validateFields() ){
-                    if( validateDB() ){
-                        loadLogin(v);
+                if( user != "" && user != "-" )
+                {
+                    Log.d(TAG, "Got here else of user.isEmpty()");
+                    loadLogout();
+
+                    edtLogin.setText("");
+                    edtPassword.setText("");
+
+                    editor = sharedpreferences.edit();
+                    editor.clear();
+                    editor.commit();
+                }
+                else
+                {
+                    Log.d(TAG, "Got here user.isEmpty()");
+                    /* Check empty field and then check db */
+                    if( validateFields() ){
+                        if( validateDB() ){
+                            loadLogin();
+                        }
                     }
                 }
             }
@@ -66,18 +101,12 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    public void openDatabase()
+    public void createDatabase()
     {
-        /*Create DB - UserScore
-         * Tables - User
-         * Fields - Username(String),
-         * Password(String){After logic},
-         * Overall score(Integer),
-         * UserPicture(BLOB)*/
         try // if the database exits, skip creating it
         {
-            UserScore = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath(dbName).getPath(), null, SQLiteDatabase.OPEN_READONLY);
-            Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
+            UserScore = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath(dbName).getPath(), null, SQLiteDatabase.OPEN_READWRITE);
+            //Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
         }
         catch (Exception e) // if the database doesn't exist, create the database
         {
@@ -88,9 +117,6 @@ public class MainActivity extends AppCompatActivity
 
             // Create User table
             UserScore.execSQL("CREATE TABLE IF NOT EXISTS User (Username VARCHAR(50), Password VARCHAR(50), Overall_Score INTEGER, User_Picture BLOB)");
-
-            // Insert Test User
-            //UserScore.execSQL("INSERT INTO User values('Test', '1234567', 0, '')");
         }
     }
 
@@ -101,16 +127,19 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void loadMusic(View view)
-    {
-        Intent intent = new Intent(getApplicationContext(), Music.class);
-        startActivity(intent);
-    }
-
-    /*logs in displaying userData including scores*/
-    public void loadLogin(View view)
+    public void loadLogin()
     {
         imageActive();
+
+        btnLogin.setText( "Logout" );
+    }
+
+    public void loadLogout()
+    {
+        LinearLayout ll_clickable_frames = (LinearLayout) findViewById(R.id.ll_clickable_frames);
+        ll_clickable_frames.setVisibility(View.INVISIBLE);
+
+        btnLogin.setText( "Login" );
     }
 
     /*Activating clickable images*/
@@ -133,7 +162,7 @@ public class MainActivity extends AppCompatActivity
         imgHighScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HighScore.class);
+                Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
                 startActivity(intent);
             }
         });
@@ -141,15 +170,7 @@ public class MainActivity extends AppCompatActivity
         imgMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Music.class);
-                startActivity(intent);
-            }
-        });
-
-        imgOurGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OurGame.class);
+                Intent intent = new Intent(MainActivity.this, MusicActivity.class);
                 startActivity(intent);
             }
         });
@@ -187,16 +208,20 @@ public class MainActivity extends AppCompatActivity
             password = edtPassword.getText().toString();
 
             String query = "SELECT * FROM User WHERE lower(Username) = '" + userName + "' AND Password = '" + password + "'";
-            Log.d("validateDB", "Query: " + query);
+            Log.d(TAG, "Query: " + query);
             Cursor rs = UserScore.rawQuery(query, null);
 
-            if(rs.getCount()>0)
+            if( rs.getCount() > 0 ) // user found
             {
+                editor = sharedpreferences.edit();
+                editor.putString("username", userName);
+                editor.commit();
+
                 bool = true;
             }
-            else if(rs.getCount()==0)
+            else if( rs.getCount() == 0 )
             {
-                Toast.makeText(this, "Wrong details", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Incorrect username or password!", Toast.LENGTH_SHORT).show();
             }
         }
         catch(Exception e)
@@ -207,4 +232,4 @@ public class MainActivity extends AppCompatActivity
 
         return bool;
     }
-} //  classEnd
+}

@@ -1,9 +1,7 @@
 package com.example.g3.guessinggameguianddb;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,90 +11,83 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class UserRegistration extends AppCompatActivity {
-  private String userName;
-  private String password;
-  private static SQLiteDatabase UserScore;  /*Database - Object*/
-  private final String dbName = "user_score";
-  private final String dbTableCreate = "CREATE TABLE IF NOT EXISTS User (Username VARCHAR(50), Password VARCHAR(50), Overall_Score INTEGER, User_Picture BLOB)"; /*Table Creation*/
+public class UserRegistration extends AppCompatActivity
+{
+    private static final String TAG = "UserRegistration";
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.user_registration);
+    private String userName;
+    private String password;
 
-    /*Creating DB*/
-    createDatabase(dbName);
-
-    /*After registration success!*/
-    Button btnRegister = (Button) findViewById(R.id.registerBtn);
-    final EditText edtName = (EditText) findViewById(R.id.edtName);
-    final EditText edtPassword = (EditText) findViewById(R.id.edtPassword);
-    btnRegister.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        /*Calling method from main class*/
-        checkAndAdd(edtName, edtPassword);
-        //loadRegistration(v);
-      } //  onClick
-    });
-  } //  onCreate
-
-  public void createDatabase(String name){
-    try {
-      UserScore = SQLiteDatabase.openDatabase(getApplicationContext().getDatabasePath(name).getPath(), null, SQLiteDatabase.OPEN_READWRITE);
-      Toast.makeText(this, "Database connection success!", Toast.LENGTH_LONG).show();
-    }
-    catch (Exception e)
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
     {
-      //Create database
-      UserScore = openOrCreateDatabase(name, MODE_PRIVATE, null);
-      Toast.makeText(this, "Database created successfully!", Toast.LENGTH_LONG).show();
-      UserScore.execSQL(dbTableCreate);
-    } //  tryCatch
-  } //  createDb
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.user_registration);
 
-  public void insertEntry(String userName, String password){
-    try{
-      ContentValues newValues = new ContentValues();
-      newValues.put("Username", userName);
-      newValues.put("Password", password);
-      UserScore.insert("User", null, newValues);
+        Button btnRegister = (Button) findViewById(R.id.registerBtn);
 
-      //  Store image
-      Toast.makeText(this, userName + " added successfully!", Toast.LENGTH_LONG).show();
-    } catch (Exception e){
-      Log.e("Note", "Exception: " + e);
-      Toast.makeText(this, "Error, Check log!", Toast.LENGTH_LONG).show();
-    } //  tryCatch
-  } //  InsertUserName
+        final EditText edtName = (EditText) findViewById(R.id.edtName);
+        final EditText edtPassword = (EditText) findViewById(R.id.edtPassword);
 
-  public void loadRegistration(View view) {
-    Intent intent = new Intent(this, MainActivity.class);
-    startActivity(intent);
-  } //  loadRegistration
+        btnRegister.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick( View v )
+            {
+                checkAndAdd(edtName, edtPassword);
+            }
+        });
+    }
 
-    /*Check
-    * 1. Already Exists
-    * 2. Wrong Input*/
-  public void checkAndAdd(EditText name, EditText pass){
-    try{
-      userName = name.getText().toString().toLowerCase();
-      password = pass.getText().toString();
-      String query = "SELECT * FROM USER";
-      Cursor rs = UserScore.rawQuery(query, null);
-      rs.moveToFirst();
-      /*Multiple entries check doesn't work*/
-      do {
-        if(rs.equals(userName)){
-          Toast.makeText(this, "The username already exists!", Toast.LENGTH_SHORT).show();
-        } //  Already Exists
-        else{
-          insertEntry(userName, password);
-        } //  else
-      } while(rs.moveToNext());
-    } catch(Exception e){
-      Toast.makeText(this, "Check log!", Toast.LENGTH_SHORT).show();
-      Log.e("userCheck", "Exception: " + e);
-    } //  tryCatch
-  } //  Check
-} //  classEnd
+    public void insertEntry(String userName, String password)
+    {
+        try
+        {
+            ContentValues newValues = new ContentValues();
+            newValues.put("Username", userName);
+            newValues.put("Password", password);
+            newValues.put("Overall_Score", 0);
+
+            MainActivity.UserScore.insert("User", null, newValues);
+
+            // TODO: Store image
+
+            Toast.makeText(this, userName + " added successfully!", Toast.LENGTH_LONG).show();
+        }
+        catch ( Exception e )
+        {
+            Toast.makeText(this, "Error, Check log!", Toast.LENGTH_LONG).show();
+            Log.e("Note", "Exception: " + e);
+        }
+    }
+
+    // check if username already exist, otherwise add user to db
+    public void checkAndAdd(EditText name, EditText pass)
+    {
+        try
+        {
+            userName = name.getText().toString().toLowerCase();
+            password = pass.getText().toString();
+
+            String query = "SELECT * FROM USER";
+            Cursor rs = MainActivity.UserScore.rawQuery(query, null);
+            rs.moveToFirst();
+
+            do
+            {
+                if ( rs.equals(userName) )
+                {
+                    Toast.makeText(this, "The username already exists!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    insertEntry(userName, password);
+                }
+            } while ( rs.moveToNext() );
+        }
+        catch ( Exception e )
+        {
+            Toast.makeText( this, "Check log!", Toast.LENGTH_SHORT ).show();
+            Log.e( "userCheck", "Exception: " + e );
+        }
+    }
+}

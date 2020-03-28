@@ -1,9 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MusicActivity">
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ListView
+        android:id="@+id/songList"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <TextView
+        android:id="@+id/tv11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="Song Name: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/txtSongName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv11"
+        android:layout_toRightOf="@+id/tv11"
+        android:text="TextView" />
+    <TextView
+        android:id="@+id/tv21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Song Length: "
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv11"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/txtSongTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv21"
+        android:layout_toRightOf="@+id/tv21"
+        android:text="0 min, 0 sec " />
+
+    <TextView
+        android:id="@+id/txtStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv21"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:text="0 min, 0 sec"
+        android:textAlignment="center" />
+
+
+    <ImageView
+        android:id="@+id/torontoPicture"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_below="@+id/tv11"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:scaleType="center"
+        android:src="@drawable/musicnote" />
+
+    <Button
+        android:id="@+id/buttonForward"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/buttonPause"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="44dp"
+        android:layout_toRightOf="@+id/buttonPause"
+        android:contentDescription="@+id/imageButton3"
+        android:text="@string/forward" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="44dp"
+        android:text="@string/backward" />
+
+    <Button
+        android:id="@+id/buttonPlay"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/buttonBack"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="44dp"
+        android:layout_toRightOf="@+id/buttonBack"
+        android:text="@string/play" />
+
+    <Button
+        android:id="@+id/buttonPause"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/buttonPlay"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="44dp"
+        android:layout_toRightOf="@+id/buttonPlay"
+        android:text="@string/pause" />
+
+    <SeekBar
+        android:id="@+id/sBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/torontoPicture"
+        android:layout_marginTop="30dp" />
+
+</RelativeLayout>

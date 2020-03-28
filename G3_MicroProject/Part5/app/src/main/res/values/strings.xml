@@ -17,9 +17,9 @@
     <string name="hint_password">Password</string>
     <string name="btn_register">Register</string>
     <string name="title_activity_user_registration">user_registration</string>.
-    <!--Music.xml-->
-    <string name="songBtn1">SONG #1</string>
-    <string name="songBtn2">SONG #2</string>
-    <string name="songBtn3">SONG #3</string>
-    <string name="stop">STOP</string>
+
+    <string name="play"><![CDATA[>]]></string>
+    <string name="backward"><![CDATA[<<]]></string>
+    <string name="forward"><![CDATA[>>]]></string>
+    <string name="pause">||</string>
 </resources>

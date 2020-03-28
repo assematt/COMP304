@@ -5,14 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import java.io.ByteArrayInputStream;
 
 public class ScoreActivity extends AppCompatActivity
 {
@@ -101,23 +106,69 @@ public class ScoreActivity extends AppCompatActivity
 
                 for(int j=0;j<rs.getColumnCount();j++)
                 {
-                    TextView textView = new TextView(this);
+                    if( j < 2 )
+                    {
+                        TextView textView = new TextView(this);
 
-                    TableRow.LayoutParams param = new TableRow.LayoutParams(
-                            TableRow.LayoutParams.WRAP_CONTENT,
-                            TableRow.LayoutParams.WRAP_CONTENT,
-                            1.0f
-                    );
-                    textView.setLayoutParams(param);
+                        TableRow.LayoutParams param = new TableRow.LayoutParams(
+                                TableRow.LayoutParams.WRAP_CONTENT,
+                                TableRow.LayoutParams.WRAP_CONTENT,
+                                1.0f
+                        );
+                        textView.setLayoutParams(param);
 
-                    Log.d(TAG, "rs.getString(j): " + rs.getString(j));
-                    textView.setText(rs.getString(j));
-                    textView.setTextColor(Color.WHITE);
-                    textView.setGravity(Gravity.CENTER);
-                    textView.setWidth(250);
-                    textView.setPadding(10,10,10,10);
+                        Log.d(TAG, "rs.getString(j): " + rs.getString(j));
+                        textView.setText(rs.getString(j));
+                        textView.setTextColor(Color.WHITE);
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setWidth(250);
+                        textView.setPadding(10,10,10,10);
 
-                    row.addView(textView);
+                        row.addView(textView);
+                    }
+                    else
+                    {
+                        Log.d(TAG, "rs.getBlob(j): " + rs.getBlob(j));
+                        if( rs.getBlob(j) == null )
+                        {
+                            TextView textView = new TextView(this);
+
+                            TableRow.LayoutParams param = new TableRow.LayoutParams(
+                                    TableRow.LayoutParams.WRAP_CONTENT,
+                                    TableRow.LayoutParams.WRAP_CONTENT,
+                                    1.0f
+                            );
+                            textView.setLayoutParams(param);
+
+                            Log.d(TAG, "rs.getString(j): " + rs.getString(j));
+                            textView.setText(rs.getString(j));
+                            textView.setTextColor(Color.WHITE);
+                            textView.setGravity(Gravity.CENTER);
+                            textView.setWidth(250);
+                            textView.setPadding(10,10,10,10);
+
+                            row.addView(textView);
+                        }
+                        else
+                        {
+                            ImageView imageView = new ImageView(this);
+
+                            TableRow.LayoutParams param = new TableRow.LayoutParams(
+                                    TableRow.LayoutParams.WRAP_CONTENT,
+                                    TableRow.LayoutParams.WRAP_CONTENT,
+                                    1.0f
+                            );
+                            imageView.setLayoutParams(param);
+
+                            // convert byte to bitmap
+                            byte imageName[] = rs.getBlob(j);
+                            ByteArrayInputStream imageStream = new ByteArrayInputStream(imageName);
+                            Bitmap theImage = BitmapFactory.decodeStream(imageStream);
+                            imageView.setImageBitmap(theImage);
+
+                            row.addView(imageView);
+                        }
+                    }
                 }
                 ll.addView(row,i);
 

@@ -1,7 +1,9 @@
 package com.example.g3.guessinggameguianddb;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,17 +17,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
+
 public class UserRegistration extends AppCompatActivity
 {
     private static final String TAG = "UserRegistration";
 
     private String userName;
     private String password;
+    private byte imageInByte[];
 
     private Button btnCapture;
     private ImageView imgCapture;
 
     private static final int Image_Capture_Code = 1;
+
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,6 +76,12 @@ public class UserRegistration extends AppCompatActivity
                 Log.d("data", "data: " + data.getExtras().get("data"));
                 Bitmap bp = (Bitmap) data.getExtras().get("data");
                 imgCapture.setImageBitmap(bp);
+
+                // convert bitmap to byte
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                imageInByte = stream.toByteArray();
+                Log.e("output before conversion", imageInByte.toString());
             }
             else if (resultCode == RESULT_CANCELED)
             {
@@ -84,10 +98,9 @@ public class UserRegistration extends AppCompatActivity
             newValues.put("Username", userName);
             newValues.put("Password", password);
             newValues.put("Overall_Score", 0);
+            newValues.put("User_Picture", imageInByte);
 
             MainActivity.UserScore.insert("User", null, newValues);
-
-            // TODO: Store image
 
             Toast.makeText(this, userName + " you are now successfully registered!", Toast.LENGTH_LONG).show();
         }

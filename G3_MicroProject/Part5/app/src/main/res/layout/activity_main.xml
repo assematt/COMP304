@@ -59,6 +59,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -73,6 +74,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tvPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

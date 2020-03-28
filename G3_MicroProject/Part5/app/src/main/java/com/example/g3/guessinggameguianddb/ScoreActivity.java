@@ -18,19 +18,12 @@ public class ScoreActivity extends AppCompatActivity
 {
     private static final String TAG = "ScoreActivity";
 
-    public static final String MyPREFERENCES = "MyPrefs" ;
-    SharedPreferences sharedpreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-
-        String user = sharedpreferences.getString("username", null);
-
-        String query = "SELECT * FROM User WHERE Username = '" + user + "'";
+        String query = "SELECT Username, Overall_Score, User_Picture FROM User ORDER BY Overall_Score DESC";
         Log.d(TAG, "query: " + query);
         Cursor rs = MainActivity.UserScore.rawQuery(query, null);
         rs.moveToFirst();
@@ -120,6 +113,7 @@ public class ScoreActivity extends AppCompatActivity
                     Log.d(TAG, "rs.getString(j): " + rs.getString(j));
                     textView.setText(rs.getString(j));
                     textView.setTextColor(Color.WHITE);
+                    textView.setGravity(Gravity.CENTER);
                     textView.setWidth(250);
                     textView.setPadding(10,10,10,10);
 
@@ -192,6 +186,7 @@ public class ScoreActivity extends AppCompatActivity
 
             textView.setText("No Results Found!");
             textView.setTextColor(Color.WHITE);
+            textView.setGravity(Gravity.CENTER);
             textView.setWidth(250);
             textView.setPadding(10,10,10,10);
 
@@ -201,6 +196,5 @@ public class ScoreActivity extends AppCompatActivity
              * END: Populate row from query result
              * */
         }
-
     }
 }

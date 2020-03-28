@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity
     Button btnLogin;
     ImageView imgGuessingGame, imgMusic, imgHighScore;
     String user = "";
+    TextView tvLogin, tvPassword;
 
     public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         /*Login*/
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
-        if( user != "" && user != "-" )
+        if( user != "-" )
         {
             Log.d(TAG, "Got here !user.isEmpty()");
             loadLogin();
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( user != "" && user != "-" )
+                if( user != "-" )
                 {
                     Log.d(TAG, "Got here else of user.isEmpty()");
                     loadLogout();
@@ -77,6 +78,9 @@ public class MainActivity extends AppCompatActivity
                     editor = sharedpreferences.edit();
                     editor.clear();
                     editor.commit();
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
                 else
                 {
@@ -131,7 +135,16 @@ public class MainActivity extends AppCompatActivity
     {
         imageActive();
 
+        tvLogin = (TextView) findViewById(R.id.tvLogin);
+        tvPassword = (TextView) findViewById(R.id.tvPassword);
+        TextView tvRegister = (TextView) findViewById(R.id.tvRegister);
+
         btnLogin.setText( "Logout" );
+        tvLogin.setText("Hello " + user);
+        edtLogin.setVisibility(View.INVISIBLE);
+        edtPassword.setVisibility(View.INVISIBLE);
+        tvPassword.setVisibility(View.INVISIBLE);
+        tvRegister.setVisibility(View.INVISIBLE);
     }
 
     public void loadLogout()
@@ -178,6 +191,7 @@ public class MainActivity extends AppCompatActivity
 
     public Boolean validateFields()
     {
+        Log.d(TAG, "Validate Fields");
         Boolean bool = false;
 
         if( edtLogin.getText().toString().trim().length()==0 )
@@ -200,6 +214,8 @@ public class MainActivity extends AppCompatActivity
 
     public Boolean validateDB()
     {
+        Log.d(TAG, "Validate DB");
+
         Boolean bool = false;
 
         try
@@ -216,6 +232,8 @@ public class MainActivity extends AppCompatActivity
                 editor = sharedpreferences.edit();
                 editor.putString("username", userName);
                 editor.commit();
+
+                user = sharedpreferences.getString("username", "-");
 
                 bool = true;
             }
